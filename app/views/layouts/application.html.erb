@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wernicke Zone</title>
+
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag 'favicon.png' %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+<div class="pre-loader">
+        <div class="load-con">
+        	<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
+            <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="fa fa-bars fa-lg"></span>
+					</button>
+					<div class="navbar-brand" href="">
+						<%= image_tag "eco/logo.png" , class: "logo" %>
+					</div>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><%= link_to "A Propos", "#about" %></li>
+						<li><%= link_to "Fonctionnalités", "#features" %>
+						</li>
+						<li><%= link_to "Avis", "#reviews" %>                            </li>
+
+						<li><%= link_to "Demo", "#demo" %>
+						</li>
+						<li><%= link_to "S'inscrire", "#getApp" , class: "getApp" %>                            </li>
+						<li><%= link_to "Contact", "#support" %>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-->
+		</nav>
+
+		<div class="tp-banner-container">
+			<div class="tp-banner" >
+				<ul>
+
+					<!-- SLIDE  -->
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+						<!-- MAIN IMAGE -->
+						<%= image_tag "transparent.png", :'data-bgfit' => "cover", :'data-bgposition' => "left top", :'data-bgrepeat' => "no-repeat" %> 
+						<!-- LAYERS -->
+						<!-- LAYER NR. 1 -->
+						<div class="tp-caption lfl fadeout hidden-xs"
+						data-x="left"
+						data-y="bottom"
+						data-hoffset="30"
+						data-voffset="0"
+						data-speed="500"
+						data-start="700"
+						data-easing="Power4.easeOut">
+						<%= image_tag "eco/Slides/hand-eco.png" %>
+					</div>
+
+					<div class="tp-caption lfl fadeout visible-xs"
+					data-x="left"
+					data-y="center"
+					data-hoffset="700"
+					data-voffset="0"
+					data-speed="500"
+					data-start="700"
+					data-easing="Power4.easeOut">
+					<%= image_tag "eco/iphone-eco.png" %> 
+				</div>
+
+				<div class="tp-caption large_white_bold sft" data-x="550" data-y="center" data-hoffset="0" data-voffset="-80" data-speed="500" data-start="1200" data-easing="Power4.easeOut">
+					Wernicke
+				</div>
+				<div class="tp-caption large_white_light sfr" data-x="840" data-y="center" data-hoffset="0" data-voffset="-80" data-speed="500" data-start="1400" data-easing="Power4.easeOut">
+					Zone
+				</div>
+				<div class="tp-caption large_white_light1 sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
+					Apprendre en autonomie
+				</div>
+
+				<div class="tp-caption sfb hidden-xs" data-x="550" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
+					<%= link_to "A PROPOS", "#about", class: "btn btn-primary inverse btn-lg" %>
+				</div>
+				<div class="tp-caption sfr hidden-xs" data-x="730" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
+
+					<%= link_to "S'INSCRIRE", "#getApp", class: "btn btn-default btn-lg" %>
+				</div>
+
+			</li>
+			<!-- SLIDE 2 -->
+			<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+				<!-- MAIN IMAGE -->
+
+			<%= image_tag "transparent.png", :'data-bgfit' => "cover", :'data-bgposition' => "left top", :'data-bgrepeat' => "no-repeat" %> 
+				<!-- LAYERS -->
+				<!-- LAYER NR. 1 -->
+				<div class="tp-caption lfb fadeout hidden-xs"
+				data-x="center"
+				data-y="bottom"
+				data-hoffset="0"
+				data-voffset="0"
+				data-speed="1000"
+				data-start="700"
+				data-easing="Power4.easeOut">
+				<%= image_tag "eco/Slides/eco-slide2.png" %>
+			</div>
+
+
+			<div class="tp-caption large_white_light sft" data-x="center" data-y="250" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1400" data-easing="Power4.easeOut">
+				Intuitif & Efficace
+			</div>
+
+
+		</li>
+
+		<!-- SLIDE 3 -->
+		<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+			<!-- MAIN IMAGE -->
+						<%= image_tag "transparent.png", :'data-bgfit' => "cover", :'data-bgposition' => "left top", :'data-bgrepeat' => "no-repeat" %> 
+			<!-- LAYERS -->
+			<!-- LAYER NR. 1 -->
+			<div class="tp-caption customin customout hidden-xs"
+			data-x="right"
+			data-y="center"
+			data-hoffset="0"
+			data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+			data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+			data-voffset="50"
+			data-speed="1000"
+			data-start="700"
+			data-easing="Power4.easeOut">
+			<%= image_tag "eco/Slides/family-eco.png" %>
+		</div>
+
+		<div class="tp-caption customin customout visible-xs"
+		data-x="center"
+		data-y="center"
+		data-hoffset="0"
+		data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+		data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+		data-voffset="0"
+		data-speed="1000"
+		data-start="700"
+		data-easing="Power4.easeOut">
+			<%= image_tag "eco/Slides/family-eco.png" %>
+	</div>
+
+	<div class="tp-caption lfb visible-xs" data-x="center" data-y="center" data-hoffset="0" data-voffset="400" data-speed="1000" data-start="1200" data-easing="Power4.easeOut">
+		<%= link_to "Browse Products", products_path %>
+	</div>
+
+
+	<div class="tp-caption mediumlarge_light_white sfl hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="-50" data-speed="1000" data-start="1000" data-easing="Power4.easeOut">
+		Interface Responsive
+	</div>
+	<div class="tp-caption mediumlarge_light_white sft hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1200" data-easing="Power4.easeOut">
+		Pour votre plus grand confort  
+	</div>
+	<div class="tp-caption small_light_white sfb hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="80" data-speed="1000" data-start="1600" data-easing="Power4.easeOut">
+	<p>Accedez à Wernicke Zone et ce depuis n'importe quel accès internet, <br>où qu'il se trouve et à n'importe quelle heure.</p>
+	</div>
+
+	<div class="tp-caption lfl hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="160" data-speed="1000" data-start="1800" data-easing="Power4.easeOut">
+		<%= link_to "Fonctionnalités", "#features", class: "btn btn-primary inverse btn-lg" %>
+	</div>
+
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</header>
+<div class="wrapper">
+
+
+<div class="wrapper">
+
+        
+
+        <section id="about">
+            <div class="container">
+                
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>A Propos</h1>
+                    <div class="divider"></div>
+                    <p>Simplifier et optimiser l’auto-évaluation</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="about-item scrollpoint sp-effect2">
+                            <i class="fa fa-download fa-2x"></i>
+                            <h3>Apprentissage</h3>
+                            <p>Depuis un texte, un article ou un cours, l'auto évaluation est désormais possible.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6" >
+                        <div class="about-item scrollpoint sp-effect5">
+                            <i class="fa fa-mobile fa-2x"></i>
+                            <h3>Plateforme</h3>
+                            <p>Depuis votre smartphone ou sur un ordinateur, n'arretez jamais votre apprentissage.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6" >
+                        <div class="about-item scrollpoint sp-effect5">
+                        <i class="fa fa-users fa-2x"></i>
+                            <h3>Partage</h3>
+                            <p>Informez vos amis de vos différentes auto évaluation effectuées.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6" >
+                        <div class="about-item scrollpoint sp-effect1">
+                            <i class="fa fa-sliders fa-2x"></i>
+                            <h3>Flexibilité</h3>
+                            <p>Adaptez vos methodes d'apprentissages, ou bien même la difficulté.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="features">
+            <div class="container">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>Fonctionnalités</h1>
+                    <div class="divider"></div>
+                    <p>Elles simplifieront votre apprentissage</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 scrollpoint sp-effect1">
+                        <div class="media media-left feature">
+                            <a class="pull-right" href="#">
+                                <i class="fa fa-cogs fa-2x"></i>
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">Texte à trous</h3>
+                                Génerer des textes à trous.
+                            </div>
+                        </div>
+                        <div class="media media-left feature">
+                            <a class="pull-right" href="#">
+                                <i class="fa fa-envelope fa-2x"></i>
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">Questions</h3>
+                                Wz vous posera des QCMs.
+                            </div>
+                        </div>
+                        <div class="media media-left feature">
+                            <a class="pull-right" href="#">
+                                <i class="fa fa-users fa-2x"></i>
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">Documents</h3>
+                                Envoyez un fichier image.
+                            </div>
+                        </div>
+                        <div class="media media-left feature">
+                            <a class="pull-right" href="#">
+                                <i class="fa fa-comments fa-2x"></i>
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">Social</h3>
+                                Intégration des réseaux sociaux.
+                            </div>
+                        </div>
+                        <div class="media media-left feature">
+                            <a class="pull-right" href="#">
+                                <i class="fa fa-calendar fa-2x"></i>
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">Objectifs</h3>
+                                Donnez vous des objectifs.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7" >
+                    <%= image_tag "eco/safari.png" , class: "img-responsive scrollpoint sp-effect5" %>
+                    </div>
+                    
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="reviews">
+            <div class="container">
+                <div class="section-heading inverse scrollpoint sp-effect3">
+                    <h1>Avis</h1>
+                    <div class="divider"></div>
+                    <p>Ils ont aimé la plateforme Wz</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-push-1 scrollpoint sp-effect3">
+                        <div class="review-filtering">
+                            <div class="review">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="review-person">
+                                            <img src="http://api.randomuser.me/portraits/women/94.jpg" alt="" class="img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="review-comment">
+                                            <h3>“Je ne me sens plus toute seule pour reviser mes cours de Faq !”</h3>
+                                            <p>
+                                                - Mélanie Delcout
+                                                <span>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star-o fa-lg"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review rollitin">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="review-person">
+                                            <img src="http://api.randomuser.me/portraits/men/70.jpg" alt="" class="img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="review-comment">
+                                            <h3>“J'ai enfin réussi à comprendre mes cours !”</h3>
+                                            <p>
+                                                - Simon Fournier
+                                                <span>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star-half-o fa-lg"></i>
+                                                    <i class="fa fa-star-o fa-lg"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review rollitin">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="review-person">
+                                            <img src="http://api.randomuser.me/portraits/men/93.jpg" alt="" class="img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="review-comment">
+                                            <h3>“On pouvait attendre un meilleur outil d'apprentissage :)”</h3>
+                                            <p>
+                                                - Alban Mellot
+                                                <span>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star fa-lg"></i>
+                                                    <i class="fa fa-star-half-o fa-lg"></i>
+                                                    <i class="fa fa-star-o fa-lg"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="demo">
+            <div class="container">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>Demo</h1>
+                    <div class="divider"></div>
+                    <p>Elle saura vous convaincre</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 scrollpoint sp-effect2">
+                        <div class="video-container" >
+                            <iframe src="http://player.vimeo.com/video/70984663"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+          <section id="getApp">
+            <div class="container-fluid">
+                <div class="section-heading inverse scrollpoint sp-effect3">
+                    <h1>Vous êtes convaincu ?</h1>
+                    <div class="divider"></div>
+                    <p>Inscrivez vous à la newsletter</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="hanging-phone scrollpoint sp-effect2 hidden-xs">
+			<%= image_tag "eco/eco-angled.png" %>
+                        </div>
+                        <div class="platforms"  style="display:inline;">
+                       <div class="col-md-4 col-md-offset-4 scrollpoint sp-effect2">
+                        <form>
+                        <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-lg">S'incrire</button>
+                           </form>
+                           </div>
+                        </div>
+
+                    </div>
+                </div>
+
+ 
+            </div>
+        </section>
+
+<section id="support" class="doublediagonal">
+            <div class="container">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>Contact</h1>
+                    <div class="divider"></div>
+                    <p>Pour plus d'informations ou un problème, contactez-nous !</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 scrollpoint sp-effect1">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Votre nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Votre email">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea cols="30" rows="10" class="form-control" placeholder="Votre message"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4 col-sm-4 contact-details scrollpoint sp-effect2">
+                                <div class="media">
+                                    <a class="pull-left" href="#" >
+                                        <i class="fa fa-map-marker fa-2x"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Paris, FRANCE</h4>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <a class="pull-left" href="#" >
+                                        <i class="fa fa-envelope fa-2x"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="mailto:support@oleose.com">contact@wz.com</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <a class="pull-left" href="#" >
+                                        <i class="fa fa-phone fa-2x"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">0147897445</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <a href="#" class="scrollpoint sp-effect3">
+                <%= image_tag "eco/logo.png", class: "logo" %>
+                </a>
+                <div class="social">
+                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
+                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
+                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
+                </div>
+                <div class="rights">
+                    <p>Copyright &copy; 2015</p>
+                    
+                </div>
+            </div>
+        </footer>
+
+
+
+</div>
+
+<script>
+        $(document).ready(function() {
+            appMaster.preLoader();
+        });
+    </script>
+
+
+</body>
+</html>
+
