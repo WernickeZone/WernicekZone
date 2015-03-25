@@ -3,7 +3,13 @@
 <head>
 	<title>Wernicke Zone</title>
 
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <link rel="stylesheet" href="../assets/animate.css">
+    <link rel="stylesheet" href="../assets/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/font-awesome.css">
+    <link rel="stylesheet" href="../assets/slick.css">
+    <link rel="stylesheet" href="../assets/settings.css">    
+    <link rel="stylesheet" href="../assets/eco.css">
 	<%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
 	<%= csrf_meta_tags %>
@@ -44,7 +50,7 @@
 
 						<li><%= link_to "Demo", "#demo" %>
 						</li>
-						<li><%= link_to "S'inscrire", "#getApp" , class: "getApp" %>                            </li>
+						<li><%= link_to "Accéder", "selection" , class: "getApp" %>                            </li>
 						<li><%= link_to "Contact", "#support" %>
 						</li>
 					</ul>
@@ -101,7 +107,7 @@
 				</div>
 				<div class="tp-caption sfr hidden-xs" data-x="730" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
 
-					<%= link_to "S'INSCRIRE", "#getApp", class: "btn btn-default btn-lg" %>
+					<%= link_to "ACCEDER AU GENERATEUR", "selection", class: "btn btn-default btn-lg" %>
 				</div>
 
 			</li>
@@ -164,7 +170,6 @@
 	</div>
 
 	<div class="tp-caption lfb visible-xs" data-x="center" data-y="center" data-hoffset="0" data-voffset="400" data-speed="1000" data-start="1200" data-easing="Power4.easeOut">
-		
 	</div>
 
 

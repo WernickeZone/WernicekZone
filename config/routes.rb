@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+resources :selection
 resources :landing
+resources :tat
 root :to => 'landing#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
