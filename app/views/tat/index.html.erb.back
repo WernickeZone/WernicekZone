@@ -100,7 +100,7 @@
 									<br> <br>
 									<div class="row">
 										<div class="col-sm-12">
-											<!-- <form role="form">
+											<form role="form">
 
 												<div class="form-group centered">
 													<h4>Telechargez directement un fichier texte</h4>
@@ -114,30 +114,6 @@
 												<button type="submit" class="btn btn-default inverse pull-left">Géneration</button>
 												<button type="reset" class="btn btn-default inverse pull-left">RAZ zone de texte</button>
 											</form>
-											-->
-
-
-											<%= form_for :session do |f| %>
-											<div class="field form-group centered">
-											  <h4>Telechargez directement un fichier texte</h4>
-											  <% f.label :inputFile, class: 'btn btn-default centered' %>
-											  <%= f.file_field :inputFile, class: 'btn btn-default centered' %>
-											</div>
-											<br><h4>- OU -</h4><br>
-											<div class="field form-group">
-											  <h4>Inserez ici directement un texte</h4>
-											  <% f.label :inputText, class: 'control-label' %>
-											  <% if(session[:inputText].nil?) %>
-											  <%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
-											  <% else %>
-											  <%= f.text_area :inputText, class: 'form-control', size: '30x10', value: session[:inputText] %>
-											  <% end %>
-											</div>
-											<div class="actions form-group">
-											  <%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
-											  <%= button_tag "RAZ zone de texte", type: :reset, class: 'btn btn-default inverse pull-left' %>
-											</div>
-											<% end %>
 										</div></div></div>
 										<div class="col-sm-3">
 											<!-- Left column -->

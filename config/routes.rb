@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-
 resources :selection
 resources :landing
-resources :tat, :path => "texte-a-trous"
+resources :tat, :path => "texte-a-trous", via: [:get, :post]
 get 'tat', to: redirect('/texte-a-trous')
 root :to => 'landing#index'
   # The priority is based upon order of creation: first created -> highest priority.
