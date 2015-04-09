@@ -100,22 +100,6 @@
 									<br> <br>
 									<div class="row">
 										<div class="col-sm-12">
-											<!-- <form role="form">
-
-												<div class="form-group centered">
-													<h4>Telechargez directement un fichier texte</h4>
-													<input type="file" class="btn btn-default centered">
-												</div>
-												<br><h4>- OU -</h4><br>
-												<div class="form-group">
-													<h4>Inserez ici directement un texte</h4>
-													<textarea cols="30" rows="10" class="form-control" placeholder="Texte"></textarea>
-												</div>
-												<button type="submit" class="btn btn-default inverse pull-left">Géneration</button>
-												<button type="reset" class="btn btn-default inverse pull-left">RAZ zone de texte</button>
-											</form>
-											-->
-
 
 											<%= form_for :session do |f| %>
 											<div class="field form-group centered">
@@ -135,7 +119,7 @@
 											</div>
 											<div class="actions form-group">
 											  <%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
-											  <%= button_tag "RAZ zone de texte", type: :reset, class: 'btn btn-default inverse pull-left' %>
+											  <%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-left', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
 											</div>
 											<% end %>
 										</div></div></div>
