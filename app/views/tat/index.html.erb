@@ -45,7 +45,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="fa fa-bars fa-lg"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="landing">
 						<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
 					</a>
 				</div>
@@ -74,6 +74,7 @@
 						<!-- Left column -->
 						<h4><i class="fa fa-bars fa-2x"></i> Menu</h4>
 						<dhr><br> <br>
+						<%= form_for :session do |f| %>
 							<div class="form-group">
 								Proportion texte masquée
 								<select class="form-control">
@@ -92,6 +93,7 @@
 										<option>3</option>
 									</select>
 								</div></div>
+								<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
 							</div><!-- /col-3 -->
 							<div class="col-sm-6">
 
@@ -101,7 +103,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 
-											<%= form_for :session do |f| %>
+											
 											<div class="field form-group centered">
 											  <h4>Telechargez directement un fichier texte</h4>
 											  <% f.label :inputFile, class: 'btn btn-default centered' %>
@@ -110,6 +112,7 @@
 											<br><h4>- OU -</h4><br>
 											<div class="field form-group">
 											  <h4>Inserez ici directement un texte</h4>
+											  <%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
 											  <% f.label :inputText, class: 'control-label' %>
 											  <% if(session[:inputText].nil?) %>
 											  <%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
@@ -118,8 +121,7 @@
 											  <% end %>
 											</div>
 											<div class="actions form-group">
-											  <%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
-											  <%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-left', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+											
 											</div>
 											<% end %>
 										</div></div></div>
