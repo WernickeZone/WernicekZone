@@ -635,11 +635,11 @@ form .form-control {
   -moz-border-radius: 5em;
   -ms-border-radius: 5em;
   -o-border-radius: 5em;
-  border-radius: 5em;
+  border-radius: 1em;
   height: 40px;
   line-height: 40px;
-  padding: 20px;
-  color: #cfcfcf;
+ 
+  color: black;
   border: 2px solid #cccccc;
   font-weight: 300;
 }
