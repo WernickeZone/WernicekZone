@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,23 +78,13 @@
 						<%= form_for :session do |f| %>
 							<div class="form-group">
 								Proportion texte masquée
-								<select class="form-control">
-									<option>20%</option> 
-									<option>30%</option> 
-									<option>40%</option> 
-									<option>50%</option>
-								</select>
+								<%= f.select(:hiddenText, ['20%','30%','40%','50%'], {}, { :class => 'form-control'})%>
 								<br>
 								<div class="form-group">
-									Marge d'erreur
-									<select class="form-control">
-										<option>0</option> 
-										<option>1</option> 
-										<option>2</option> 
-										<option>3</option>
-									</select>
-								</div></div>
-								<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
+								  Marge d'erreur
+								  <%= f.select(:errorMargin, ['0','1','2','3'], {}, { :class => 'form-control'})%>
+							</div></div>
+							<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
 							</div><!-- /col-3 -->
 							<div class="col-sm-6">
 
