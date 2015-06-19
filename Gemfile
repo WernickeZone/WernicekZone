@@ -80,3 +80,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# For OCR
+# Install packae for debian: aspell libaspell-dev aspell-fr
+gem 'rtesseract'
+gem 'rmagick'
+gem 'ffi-aspell'
