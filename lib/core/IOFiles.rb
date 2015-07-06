@@ -35,10 +35,11 @@ module IOFiles
   end
 end
 
-include IOFiles
-file = File.new('machin.docx')
-content = IOFiles.getFileType(file)
-bool = IOFiles.isImageValid?(file)
-puts bool
-bool = IOFiles.isTextValid?(file)
-puts bool
+#How to use it
+#include IOFiles
+#file = File.new('machin.docx')
+#content = IOFiles.getFileType(file)
+#bool = IOFiles.isImageValid?(file)
+#puts bool
+#bool = IOFiles.isTextValid?(file)
+#puts bool
