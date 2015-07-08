@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fullText: MyText
+  tat_content: MyText
+  tat_responses: MyText
+
+two:
+  fullText: MyText
+  tat_content: MyText
+  tat_responses: MyText
