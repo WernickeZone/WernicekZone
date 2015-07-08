@@ -9,25 +9,22 @@ module IOFiles
     data = file.read
     text = Yomu.read :text, data
   end
-  def IOFiles.getFileType(file)
-    return File.extname(file)
-  end
-  def IOFiles.isImageValid?(file)
+  def IOFiles.isImageValid?(name)
     images = [ :png, :jpg, :jpeg ]
     #Liste incomplète
     images.each do | ext |
-      if IOFiles.getFileType(file) == ('.' + ext.to_s)
+      if name == ('.' + ext.to_s)
         return true
       end
     end
     return false
   end
-  def IOFiles.isTextValid?(file)
+  def IOFiles.isTextValid?(name)
     texts = [:doc, :docx, :xls, :xlsx, :ppt, :pptx,
              :odt, :ods, :odp, :rtf, :pdf, :txt]
     #Liste incomplète
     texts.each do | ext |
-      if IOFiles.getFileType(file) == ('.' + ext.to_s)
+      if name == ('.' + ext.to_s)
         return true
       end
     end

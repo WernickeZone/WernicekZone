@@ -6,14 +6,16 @@ module OCR
   include Magick
   
   def OCR.translate(name)
-    rmagick = ImageList.new(name)
+    File.rename(name.tempfile, '/tmp/' + name.original_filename);
+    file = File.open('/tmp/' + name.original_filename, 'r+');
+    rmagick = ImageList.new(file)
     width = rmagick.columns
     height = rmagick.rows
     rmagick = rmagick.resample(width, height)
     
-    rmagick.write(name) { self.quality = 100 }
-    
-    image = RTesseract.new(name)
+    rmagick.write(file) { self.quality = 100 }
+
+    image = RTesseract.new(file)
     string = image.to_s
     temp = string
     speller = FFI::Aspell::Speller.new('fr')
@@ -25,8 +27,6 @@ module OCR
         temp = temp.gsub("#{word}", "#{test}")
       end
     end
-    
     return temp
-    
   end
 end
