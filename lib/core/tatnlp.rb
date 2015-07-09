@@ -1,11 +1,11 @@
 # coding: utf-8
-module TAT
+module TATNLP
   require 'treat'
   include Treat::Core::DSL
   Treat.core.language.detect = false
   Treat.core.language.default = 'french'
   #Treat.core.language.default = 'english'
-  def TAT.generateTat(text, blanks, error)
+  def TATNLP.generateTat(text, blanks, error)
     input = paragraph text
     input.apply(:chunk, :segment, :tokenize)
     blank = blanks[0].to_i * 10
@@ -60,10 +60,10 @@ module TAT
   end
 end
 #####How to use it
-include TAT
-###Le include TAT est necessaire ici, et je ne comprend pas pourquoi.
+include TATNLP
+###Le include TATNLP est necessaire ici, et je ne comprend pas pourquoi.
 #texte = 'Bonjour, je suis la reine des neiges.'
 #texte = 'This is a fucking text.Deal with it'
-#content = TAT.generateTat(texte,'50%','1')
+#content = TATNLP.generateTat(texte,'50%','1')
 #require 'yaml'
 #puts YAML::dump(content)

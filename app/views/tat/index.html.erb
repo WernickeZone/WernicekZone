@@ -105,10 +105,20 @@
 											  <h4>Inserez ici directement un texte</h4>
 											  <%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
 											  <% f.label :inputText, class: 'control-label' %>
-											  <% if(session[:inputText].nil?) %>
+											  <% if(!@tat.tat_content.nil? && @tat.tat_content != "") %>
+											  <% i = 0 %>
+											  <% tat_content = @tat.tat_content.split ('|-@-|') %>
+											  <% tat_repsonses = @tat.tat_responses.split ('|-@-|') %>
+											  <% j = tat_content.count %>
+											  <% tat_content.each do |a| %>
+											  <% i=i+1 %>
+											  <%= f.label i, a %>
+											  <% if (i < j) %><%= f.text_field i, class: 'form' %><% end %>
+											  <% end %>
+											  <% elsif(@tat.fullText.nil?) %>
 											  <%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
 											  <% else %>
-											  <%= f.text_area :inputText, class: 'form-control', size: '30x10', value: session[:inputText] %>
+											  <%= f.text_area :inputText, class: 'form-control', size: '30x10', value: @tat.fullText %>
 											  <% end %>
 											</div>
 											<div class="actions form-group">
