@@ -27,6 +27,7 @@ module OCR
         temp = temp.gsub("#{word}", "#{test}")
       end
     end
+    File.delete file
     return temp
   end
 end

@@ -37,7 +37,14 @@ class TatController < ApplicationController
     require 'core/IOFiles.rb'
     uploaded_io = params[:session][:inputFile]
     #session[:inputText] = IOFiles.getFileContent(uploaded_io)
-    @tat.fullText = IOFiles.getFileContent(uploaded_io)
+    if IOFiles.isTextValid?(File.extname(uploaded_io.original_filename).downcase)
+      @tat.fullText = IOFiles.getFileContent(uploaded_io)
+    elsif IOFiles.isImageValid?(File.extname(uploaded_io.original_filename.to_s).downcase)
+      require 'core/OCR.rb'
+      @tat.fullText = OCR.translate(uploaded_io)
+    else
+      @tat.fullText = "Erreur lors du chargement du fichier."
+    end
     @tat.tat_content = nil
     @tat.tat_responses = nil
     @tat.save!
