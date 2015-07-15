@@ -3,7 +3,13 @@ source 'http://gems.github.com'
 gem 'twitter-bootstrap-rails'
 gem "therubyracer"
 gem "less-rails"
+gem 'rails', '4.1.8'
+gem 'matrix'
+gem 'tf-idf-similarity'
+gem 'jrb'
+gem 'stanford-core-nlp'
 gem 'treat'
+gem 'railties'
 ####Treat dependencies
 #gem 'birch'
 #gem 'schiphol'
@@ -44,7 +50,6 @@ gem 'scalpel'
 #gem 'jrb'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
