@@ -64,6 +64,17 @@ module TATNLP
     #Error3 Correction orthographique légère
     #puts YAML::dump(input)
   end
+  def TATNLP.verifyAnswers(tat_answers, user_answers)
+    is_right = Array.new
+    tat_answers.each do |a|
+      if (a == user_answers)
+        is_right.push "true"
+      else
+        is_right.push "false"
+      end
+    end
+    return is_right
+  end
 end
 #####How to use it
 include TATNLP

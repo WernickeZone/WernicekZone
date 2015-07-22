@@ -36,6 +36,8 @@ class TatController < ApplicationController
 
   def upload
     require 'core/IOFiles.rb'
+    session[:hiddenText] = params[:session][:hiddenText]
+    session[:errorMargin] = params[:session][:errorMargin]
     uploaded_io = params[:session][:inputFile]
     #session[:inputText] = IOFiles.getFileContent(uploaded_io)
     if IOFiles.isTextValid?(File.extname(uploaded_io.original_filename).downcase)
