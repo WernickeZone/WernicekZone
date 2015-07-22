@@ -128,11 +128,7 @@ header .navbar-default ul.navbar-nav li a:hover:after {
   background: #ffffff;
 }
 header .navbar-default ul.navbar-nav li a.getApp {
-  -webkit-border-radius: 5em;
-  -moz-border-radius: 5em;
-  -ms-border-radius: 5em;
-  -o-border-radius: 5em;
-  border-radius: 5em;
+
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
@@ -580,11 +576,7 @@ section::after {
   font-weight: 300;
 }
 .btn {
-  -webkit-border-radius: 3em;
-  -moz-border-radius: 3em;
-  -ms-border-radius: 3em;
-  -o-border-radius: 3em;
-  border-radius: 3em;
+
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1154,19 +1146,7 @@ form .form-control:focus {
   margin-top: 50px;
 }
 dhr {
-  background: white;
-  content: "";
-  position: relative;
   height: 4px;
-  width: 100%;
-  display: block;
-  text-align: center;
-  margin: 13px;
-  -webkit-border-radius: 5em;foo
-  -moz-border-radius: 5em;
-  -ms-border-radius: 5em;
-  -o-border-radius: 5em;
-  border-radius: 5em;
 }
 h4{
   color: white;
