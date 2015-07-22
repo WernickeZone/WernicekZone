@@ -90,7 +90,7 @@
 							<%= form_for :session do |f| %>
 							<div class="form-group">
 								Proportion texte masquée
-								<%= f.select(:hiddenText, ['20%','30%','40%','50%'], {}, { :class => 'form-control'})%>
+								<%= f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
 								<br>
 								<div class="form-group">
 									Marge d'erreur
@@ -128,8 +128,8 @@
 											<br>
 											<div id="tat-back">
 												<% i = 0 %>
-												<% tat_content = @tat.tat_content.split ('|-@-|') %>
-												<% tat_repsonses = @tat.tat_responses.split ('|-@-|') %>
+												<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+												<% tat_repsonses = @tat.tat_responses.split (session[:splitter]) %>
 												<% j = tat_content.count %>
 												<% tat_content.each do |a| %>
 												<% i=i+1 %>

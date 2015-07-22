@@ -2,8 +2,9 @@
 
 class TatController < ApplicationController
   def index
+    session[:splitter] = '|-@-|'
     if !session[:key].nil?
-      @tat = Tat.find(session[:key])
+      @tat = Tat.find_by(id: session[:key])
     end
     if @tat.nil?
       @tat = Tat.new
@@ -17,7 +18,7 @@ class TatController < ApplicationController
     session[:key] = @tat.id
     #session[:inputText] = params[:session][:inputText]
     session[:hiddenText] = params[:session][:hiddenText]
-    session[:errorMargin] = params[:session][:errorMagrin]
+    session[:errorMargin] = params[:session][:errorMargin]
     if params[:session][:inputFile].nil?
     #  if session[:inputText] == ""
       if @tat.fullText == ""
@@ -57,10 +58,12 @@ class TatController < ApplicationController
     #session[:tat] = TAT.generateTat(session[:inputText],'50%','0');
     #session[:inputText] = TATNLP.generateTat(session[:inputText], session[:hiddenText],'0')
     array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText],'0')
-    @tat.tat_content = array_tat[0].join('|-@-|')
-    @tat.tat_responses = array_tat[1].join('|-@-|')
-    @tat.fullText = nil
-    @tat.save!
+    if (!array_tat.nil?)
+      @tat.tat_content = array_tat[0].join(session[:splitter])
+      @tat.tat_responses = array_tat[1].join(session[:splitter])
+      @tat.fullText = nil
+      @tat.save!
+    end
     redirect_to action: "index"
   end
 end
