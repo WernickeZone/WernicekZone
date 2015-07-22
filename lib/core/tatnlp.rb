@@ -6,6 +6,12 @@ module TATNLP
   Treat.core.language.default = 'french'
   #Treat.core.language.default = 'english'
   def TATNLP.generateTat(text, blanks, error)
+    if (text.nil?)
+      return nil
+    end
+    if (text[text.length - 1] != '.' || text[text.length - 1] != '!' || text[text.length - 1] != '?')
+      text[text.length] = '.'
+    end
     input = paragraph text
     input.apply(:chunk, :segment, :tokenize)
     blank = blanks[0].to_i * 10
