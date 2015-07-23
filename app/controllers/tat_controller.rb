@@ -8,30 +8,42 @@ class TatController < ApplicationController
     end
     if @tat.nil?
       @tat = Tat.new
+      @tat.step = "init"
+	  @tat.save!
+	  session[:key] = @tat.id
     end
   end
 
   def create
-    @tat = Tat.new
-    @tat.fullText = params[:session][:inputText]
-    @tat.save!
-    session[:key] = @tat.id
-    #session[:inputText] = params[:session][:inputText]
+    if !session[:key].nil?
+      @tat = Tat.find_by(id: session[:key])
+    end
+    if @tat.nil?
+      @tat = Tat.new
+	  @tat.step = "init"
+      @tat.save!
+      session[:key] = @tat.id
+	end
     session[:hiddenText] = params[:session][:hiddenText]
     session[:errorMargin] = params[:session][:errorMargin]
-    if params[:session][:inputFile].nil?
-    #  if session[:inputText] == ""
-      if @tat.fullText == ""
-        @tat.tat_content = nil
-        @tat.tat_responses = nil
-        @tat.save!
-        redirect_to action: "index"
-      else
-        tatGeneration
-      end
-    else
+    if !params[:session][:inputFile].nil?
+	  @tat.step = "file"
+      @tat.save!
       upload
+    elsif !params[:session]["1"].nil? && @tat.step == "tat"
+      @tat.step = "answers"
+      @tat.save!
+      tatVerify
+    elsif !params[:session][:inputText].nil? && params[:session][:inputText] != ""
+	  @tat.fullText = params[:session][:inputText]
+	  @tat.step = "tat"
+      @tat.save!
+      tatGeneration
+	else
+      @tat.step = "init"
+      @tat.save!
     end
+	redirect_to action: "index"
   end
 
   def upload
@@ -48,24 +60,36 @@ class TatController < ApplicationController
     else
       @tat.fullText = "Erreur lors du chargement du fichier."
     end
-    @tat.tat_content = nil
-    @tat.tat_responses = nil
     @tat.save!
-    redirect_to action: "index"
   end
 
   def tatGeneration
     require 'core/tatnlp.rb'
-    #include TAT
-    #session[:tat] = TAT.generateTat(session[:inputText],'50%','0');
-    #session[:inputText] = TATNLP.generateTat(session[:inputText], session[:hiddenText],'0')
     array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText],'0')
     if (!array_tat.nil?)
       @tat.tat_content = array_tat[0].join(session[:splitter])
-      @tat.tat_responses = array_tat[1].join(session[:splitter])
-      @tat.fullText = nil
-      @tat.save!
+      @tat.tat_answers = array_tat[1].join(session[:splitter])
+	else
+      @tat.step = "init"
     end
-    redirect_to action: "index"
+	@tat.save!
+  end
+
+  def tatVerify
+    require 'core/tatnlp.rb'
+	if (@tat.tat_answers.nil?)
+		@tat.step = "answers is null"
+	else
+		tat_answers = @tat.tat_answers.split (session[:splitter])
+		user_answers = Array.new
+		j = tat_answers.count
+		for i in 1..j
+			user_answers.push params[:session][i.to_s]
+		end
+		array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers)
+		@tat.user_answers = user_answers.join(session[:splitter])
+		@tat.is_right = array_isRight.join(session[:splitter])
+	end
+	@tat.save!
   end
 end

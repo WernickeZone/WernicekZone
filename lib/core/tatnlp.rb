@@ -66,12 +66,14 @@ module TATNLP
   end
   def TATNLP.verifyAnswers(tat_answers, user_answers)
     is_right = Array.new
+	i = 0
     tat_answers.each do |a|
-      if (a == user_answers)
+      if (a == user_answers[i])
         is_right.push "true"
       else
         is_right.push "false"
       end
+	  i = i + 1
     end
     return is_right
   end
