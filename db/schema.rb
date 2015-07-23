@@ -15,8 +15,11 @@ ActiveRecord::Schema.define(version: 20150708122031) do
 
   create_table "tats", force: true do |t|
     t.text     "fullText"
+    t.text     "step"
     t.text     "tat_content"
-    t.text     "tat_responses"
+    t.text     "tat_answers"
+    t.text     "user_answers"
+    t.text     "is_right"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
