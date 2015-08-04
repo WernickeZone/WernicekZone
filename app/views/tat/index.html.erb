@@ -94,9 +94,9 @@
 								<div class="form-group">
 								  Marge d'erreur
 								  <% if (session[:errorMargin].nil?) %>
-								  <%= f.select(:errorMargin, ['0','1','2','3'], {}, { :class => 'form-control'})%>
+								  <%= f.select(:errorMargin, ['0','1','2'], {}, { :class => 'form-control'})%>
 								  <% else %>
-								  <%= f.select(:errorMargin, ['0','1','2','3'], {:selected => session[:errorMargin]}, { :class => 'form-control'})%>
+								  <%= f.select(:errorMargin, ['0','1','2'], {:selected => session[:errorMargin]}, { :class => 'form-control'})%>
 								  <% end %>
 								</div></div>
 								<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
