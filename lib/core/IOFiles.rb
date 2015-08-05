@@ -4,10 +4,12 @@ module IOFiles
   def self.getLocalFileContent(name)
 	doc = File.read name
 	text = Yomu.read :text, doc
+        text = cleanText(text)
   end
   def self.getFileContent(file)
     data = file.read
     text = Yomu.read :text, data
+    text = cleanText(text)
   end
   def self.isImageValid?(name)
     images = [ :png, :jpg, :jpeg ]
@@ -29,6 +31,20 @@ module IOFiles
       end
     end
     return false
+  end
+  def self.cleanText(text)
+    prev = ""
+    cleanText = ""
+    text.each_char do |c|
+      if (c == "\n" || c == "\r" || c == "\t" || c == "\v")
+        c = ' '
+      end
+      if (!(prev == ' ' && c == ' '))
+        cleanText << c
+      end
+      prev = c
+    end
+    return cleanText
   end
 end
 
