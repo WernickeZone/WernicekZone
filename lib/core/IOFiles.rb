@@ -1,15 +1,17 @@
 # coding: utf-8
 module IOFiles
   require 'yomu'
-  def IOFiles.getLocalFileContent(name)
+  def self.getLocalFileContent(name)
 	doc = File.read name
 	text = Yomu.read :text, doc
+        text = cleanText(text)
   end
-  def IOFiles.getFileContent(file)
+  def self.getFileContent(file)
     data = file.read
     text = Yomu.read :text, data
+    text = cleanText(text)
   end
-  def IOFiles.isImageValid?(name)
+  def self.isImageValid?(name)
     images = [ :png, :jpg, :jpeg ]
     #Liste incomplète
     images.each do | ext |
@@ -19,7 +21,7 @@ module IOFiles
     end
     return false
   end
-  def IOFiles.isTextValid?(name)
+  def self.isTextValid?(name)
     texts = [:doc, :docx, :xls, :xlsx, :ppt, :pptx,
              :odt, :ods, :odp, :rtf, :pdf, :txt]
     #Liste incomplète
@@ -29,6 +31,20 @@ module IOFiles
       end
     end
     return false
+  end
+  def self.cleanText(text)
+    prev = ""
+    cleanText = ""
+    text.each_char do |c|
+      if (c == "\n" || c == "\r" || c == "\t" || c == "\v")
+        c = ' '
+      end
+      if (!(prev == ' ' && c == ' '))
+        cleanText << c
+      end
+      prev = c
+    end
+    return cleanText
   end
 end
 

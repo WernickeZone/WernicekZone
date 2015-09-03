@@ -1,11 +1,10 @@
 module OCR
-  
   require 'ffi/aspell'
   require 'rtesseract'
   require 'rmagick'
   include Magick
   
-  def OCR.translate(name)
+  def self.translate(name)
     File.rename(name.tempfile, '/tmp/' + name.original_filename);
     file = File.open('/tmp/' + name.original_filename, 'r+');
     rmagick = ImageList.new(file)

@@ -5,7 +5,8 @@ module TATNLP
   Treat.core.language.detect = false
   Treat.core.language.default = 'french'
   #Treat.core.language.default = 'english'
-  def TATNLP.generateTat(text, blanks, error)
+
+  def self.generateTat(text, blanks)
     if (text.nil?)
       return nil
     end
@@ -54,35 +55,77 @@ module TATNLP
       end
     end
     output[0].push tmpStr
-    if error == '0'
-      return output
-    else
-      return output
-    end
-    #Error1 Ajout des synonymes
-    #Error2 Hypernymes
-    #Error3 Correction orthographique légère
-    #puts YAML::dump(input)
+    return output
   end
-  def TATNLP.verifyAnswers(tat_answers, user_answers)
+
+  def self.verifyAnswers(tat_answers, user_answers, errorLevel)
     is_right = Array.new
-	i = 0
+    i = 0
     tat_answers.each do |a|
-      if (a == user_answers[i])
-        is_right.push "true"
-      else
-        is_right.push "false"
+      bool = "false"
+      if (errorLevel == '0')
+        if (a.downcase == user_answers[i].downcase)
+          bool = "true"
+        end
+      elsif (errorLevel == '1')
+        if (verifyLexique(a.downcase, user_answers[i].downcase) == "true")
+          bool = "true"
+        end
+      elsif (errorLevel == '2')
+        if (verifySyns(a.downcase, user_answers[i].downcase) == "true")
+          bool = "true"
+        end
       end
-	  i = i + 1
+      is_right.push bool
+      i = i + 1
     end
     return is_right
   end
+
+  def self.verifyLexique(tat_word, user_word)
+    if (tat_word.nil? || tat_word == '' || user_word.nil? || user_word == '')
+      return "false"
+    end
+    if (tat_word == user_word)
+      return "true"
+    end
+    require 'core/lexique/lexique.rb'
+    words = LEXIQUE.getAnswersList(tat_word)
+    words.each do |word|
+      if (word == user_word)
+        return "true"
+      end
+    end
+    return "false"
+  end
+
+  def self.verifySyns(tat_word, user_word)
+    if (tat_word.nil? || tat_word == '' || user_word.nil? || user_word == '')
+      return "false"
+    end
+    if (tat_word == user_word)
+      return "true"
+    end
+    
+    require 'core/lexique/synonymes.rb'
+    require 'core/lexique/lexique.rb'
+    base = LEXIQUE.getWordBase2(tat_word)
+    syns = SYN.getSynonyms(base)
+    syns.each do |syn|
+      if (verifyLexique(syn, user_word) == "true")
+        return "true"
+      end
+    end
+    return "false"
+  end
 end
+
 #####How to use it
 include TATNLP
 ###Le include TATNLP est necessaire ici, et je ne comprend pas pourquoi.
-#texte = 'Bonjour, je suis la reine des neiges.'
-#texte = 'This is a fucking text.Deal with it'
+#texte = 'Bonjour, je suis la reine daesh.'
 #content = TATNLP.generateTat(texte,'50%','1')
-#require 'yaml'
-#puts YAML::dump(content)
+####Marge d'erreur
+#0 => Aucune erreur
+#1 => Erreurs singulier/pluriel ou conjugaison si verbe
+#2 => Niveau 1 + Synonymes autorisés

@@ -65,7 +65,7 @@ class TatController < ApplicationController
 
   def tatGeneration
     require 'core/tatnlp.rb'
-    array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText],'0')
+    array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText])
     if (!array_tat.nil?)
       @tat.tat_content = array_tat[0].join(session[:splitter])
       @tat.tat_answers = array_tat[1].join(session[:splitter])
@@ -86,7 +86,7 @@ class TatController < ApplicationController
 		for i in 1..j
 			user_answers.push params[:session][i.to_s]
 		end
-		array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers)
+		array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers, session[:errorMargin])
 		@tat.user_answers = user_answers.join(session[:splitter])
 		@tat.is_right = array_isRight.join(session[:splitter])
 	end
