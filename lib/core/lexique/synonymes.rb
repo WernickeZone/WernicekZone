@@ -1,5 +1,7 @@
 # coding: utf-8
 module SYN
+
+  #Récupère la base de données au format CSV
   def self.getCSV(fileName)
     if (fileName.nil? || fileName == '')
       return nil
@@ -9,6 +11,7 @@ module SYN
     return csv
   end
 
+  #Récupère la liste des synonymes d'un mot en question
   def self.getWordList(word, csv)
     if (word.nil? || word == '')
       return nil
@@ -17,6 +20,7 @@ module SYN
     return words
   end
 
+  #Cette fonction remet la liste des mots en forme
   def self.cleanWordList(wordList)
     if (wordList.nil?)
       return nil
@@ -31,7 +35,8 @@ module SYN
     end
     return words
   end
-  
+
+  #Surcouche des fonctions précédentes et récuperant la liste complète des synonymes
   def self.getSynonyms(word)
     if (word.nil? || word == '')
       return nil
