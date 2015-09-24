@@ -1,7 +1,7 @@
 # coding: utf-8
-
 class TatController < ApplicationController
   def index
+    #Initialise les données liées à la session de l'utilisateur
     session[:splitter] = '|-@-|'
     if !session[:key].nil?
       @tat = Tat.find_by(id: session[:key])
@@ -15,6 +15,7 @@ class TatController < ApplicationController
   end
 
   def create
+    #Controle les données utilisateurs avant la céation du texte à trous
     if !session[:key].nil?
       @tat = Tat.find_by(id: session[:key])
     end
@@ -26,6 +27,7 @@ class TatController < ApplicationController
 	end
     session[:hiddenText] = params[:session][:hiddenText]
     session[:errorMargin] = params[:session][:errorMargin]
+    #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
     if !params[:session][:inputFile].nil?
 	  @tat.step = "file"
       @tat.save!
@@ -43,15 +45,17 @@ class TatController < ApplicationController
       @tat.step = "init"
       @tat.save!
     end
-	redirect_to action: "index"
+    redirect_to action: "index"
   end
 
   def upload
+    #Méthode permettant à l'utilisateur de charger un fichier
     require 'core/IOFiles.rb'
     session[:hiddenText] = params[:session][:hiddenText]
     session[:errorMargin] = params[:session][:errorMargin]
     uploaded_io = params[:session][:inputFile]
     #session[:inputText] = IOFiles.getFileContent(uploaded_io)
+    #Si c'est un fichier texte, utilise l'extracteur de texte et si c'est un fichier image, l'OCR
     if IOFiles.isTextValid?(File.extname(uploaded_io.original_filename).downcase)
       @tat.fullText = IOFiles.getFileContent(uploaded_io)
     elsif IOFiles.isImageValid?(File.extname(uploaded_io.original_filename.to_s).downcase)
@@ -64,6 +68,7 @@ class TatController < ApplicationController
   end
 
   def tatGeneration
+    #Générer le texte à trous et l'envoie le stocke dans un object temporaire disponible pour le front-end
     require 'core/tatnlp.rb'
     array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText])
     if (!array_tat.nil?)
@@ -76,6 +81,7 @@ class TatController < ApplicationController
   end
 
   def tatVerify
+    #Vérifie les réponses du texte à trous et stocke la correction dans un objet temporaire pour le front-end
     require 'core/tatnlp.rb'
 	if (@tat.tat_answers.nil?)
 		@tat.step = "answers is null"
