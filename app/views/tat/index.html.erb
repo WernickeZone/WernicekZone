@@ -2,231 +2,223 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Wernicke Zone</title>
+	<title>Wernicke Zone</title>
 
-<link rel="stylesheet" href="../assets/bootstrap.css">
-<link rel="stylesheet" href="../assets/animate.css">
-<link rel="stylesheet" href="../assets/font-awesome.min.css">
-<link rel="stylesheet" href="../assets/font-awesome.css">
-<link rel="stylesheet" href="../assets/slick.css">
-<link rel="stylesheet" href="../assets/settings.css">    
-<link rel="stylesheet" href="../assets/eco_outils.css">
-<link rel="stylesheet" href="../assets/tat.css">
-<script src="../assets/application.js"></script>
-<script type="text/javascript" src="../assets/modernizr.custom.32033.js"></script>
-<script src="../assets/jquery-1.11.1.min.js"></script>
-<script src="../assets/bootstrap.min.js"></script>
-<script src="../assets/slick.min.js"></script>
-<script src="../assets/placeholdem.min.js"></script>
-<script src="../assets/rs-plugin/jquery.themepunch.plugins.min.js"></script>
-<script src="../assets/rs-plugin/jquery.themepunch.revolution.min.js"></script>
-<script src="../assets/waypoints.min.js"></script>
-<script src="../assets/scripts_outils.js"></script>
-<%= favicon_link_tag 'favicon.png' %>
-<%= csrf_meta_tags %>
+	<link rel="stylesheet" href="../assets/bootstrap.css">
+	<link rel="stylesheet" href="../assets/animate.css">
+	<link rel="stylesheet" href="../assets/font-awesome.min.css">
+	<link rel="stylesheet" href="../assets/font-awesome.css">
+	<link rel="stylesheet" href="../assets/slick.css">
+	<link rel="stylesheet" href="../assets/settings.css">    
+	<link rel="stylesheet" href="../assets/eco_outils.css">
+	<link rel="stylesheet" href="../assets/tat.css">
+	<link rel="stylesheet" href="../assets/introjs.css">
+	<script src="../assets/application.js"></script>
+	<script type="text/javascript" src="../assets/modernizr.custom.32033.js"></script>
+	<script src="../assets/jquery-1.11.1.min.js"></script>
+	<script src="../assets/bootstrap.min.js"></script>
+	<script src="../assets/slick.min.js"></script>
+	<script src="../assets/placeholdem.min.js"></script>
+	<script src="../assets/rs-plugin/jquery.themepunch.plugins.min.js"></script>
+	<script src="../assets/rs-plugin/jquery.themepunch.revolution.min.js"></script>
+	<script src="../assets/waypoints.min.js"></script>
+	<script src="../assets/scripts_outils.js"></script>
+	<script src="../assets/intro.js"></script>
+	<%= favicon_link_tag 'favicon.png' %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 
-<div class="pre-loader">
-	<div class="load-con">
-		<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
-		<div class="spinner">
-			<div class="bounce1"></div>
-			<div class="bounce2"></div>
-			<div class="bounce3"></div>
+	<div class="pre-loader">
+		<div class="load-con">
+			<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<header>
-	<nav class="navbar navbar-default navbar-fixed-top scrolled" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="fa fa-bars fa-lg"></span>
-				</button>
-				<a class="navbar-brand" href="landing">
-					<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
-				</a>
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top scrolled" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="fa fa-bars fa-lg"></span>
+					</button>
+					<a class="navbar-brand" href="landing">
+						<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><%= link_to "Retour à l'Accueil", "landing", class:"getApp" %>
+						</li>
+
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
 			</div>
+			<!-- /.container-->
+		</nav>
+	</header>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<div class="wrapper">
+		<section>
+			<div class="container">
+				<div class="row" style="">
 
-				<ul class="nav navbar-nav navbar-right">
-					<li><%= link_to "Retour à l'Accueil", "landing", class:"getApp" %>
-					</li>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
 
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-->
-	</nav>
-</header>
+						<h4><i class="fa fa-spinner fa-2x"></i> Générateur Texte à Trous</h4>
+						<hr>
+						<br> 
 
-<div class="wrapper">
-	<section>
-		<div class="container">
-			<div class="row" style="">
-				<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
-					<h4><i class="fa fa-gears fa-2x"></i> Paramètres</h4>
-					<hr><br> 
-					<div class="offer">
-						<div class="shape">
-							<div class="shape-text">
-								&nbsp;2								
-							</div>
-						</div>
-
-						<div class="offer-content">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<% @tat.step %>
 							<%= form_for :session do |f| %>
-							<div class="form-group">
-							  Proportion texte masquée
-							  <% if (session[:hiddenText].nil?) %>
-							  <%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
-							  <% else %>
-							  <%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {:selected => session[:hiddenText]}, { :class => 'form-control'})%>
-							  <% end %>
-								<br>
-								<div class="form-group">
-								  Marge d'erreur
-								  <% if (session[:errorMargin].nil?) %>
-								  <%= f.select(:errorMargin, ['0','1','2'], {}, { :class => 'form-control'})%>
-								  <% else %>
-								  <%= f.select(:errorMargin, ['0','1','2'], {:selected => session[:errorMargin]}, { :class => 'form-control'})%>
-								  <% end %>
-								</div></div>
-								<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
-							</div>
-						</div></div>
-						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+							<% if(@tat.step == "tat" && !@tat.tat_content.nil? && @tat.tat_content != "") %>
+							<div class="offer">
+								<div class="offer-content">
+									<div class="field form-group centered">
+										<%= f.submit "Annuler", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+										<h4><i class="fa fa-check"></i> Génération effectuée </h4>
+										<br>
 
-							<h4><i class="fa fa-spinner fa-2x"></i> Générateur Texte à Trous</h4>
-							<hr>
-							<br> 
-
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-								<% if(@tat.step == "tat" && !@tat.tat_content.nil? && @tat.tat_content != "") %>
-								<div class="offer">
-									<div class="shape">
-										<div class="shape-text">
-											&nbsp;3					
-										</div>
-									</div>
-
-									<div class="offer-content">
-										<div class="field form-group centered">
-											<%= f.submit "Annuler", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
-											<h4><i class="fa fa-check"></i> Génération effectuée </h4>
-											<br>
-											<div id="tat-back">
-												<% i = 0 %>
-												<% tat_content = @tat.tat_content.split (session[:splitter]) %>
-												<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
-												<% j = tat_content.count %>
-												<% tat_content.each do |a| %>
-												<% 	i=i+1 %>
-												<%	if (a.nil? || a == '')%>
-												<%=	 	f.label a %>
-												<%	else%>
-												<%= 		f.label i, a %>
-												<%	end%>
-												<% 	if (i < j) %>
-												<%= 		f.text_field i, class: 'input-tat' %>
-												<% 	end %>
-												<% end %>
-											</div>
-									<% elsif(@tat.step == "answers") %>
-									<div class="offer"><div class="shape"><div class="shape-text">&nbsp;3</div></div>
-									<div class="offer-content">
-										<div class="field form-group centered">
-											<%= f.submit "RAZ", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
-											<h4><i class="fa fa-check"></i> Réponses </h4>
-											<br>
-											<div id="tat-back">
-												<% tat_content = @tat.tat_content.split (session[:splitter]) %>
-												<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
-												<% user_answers = @tat.user_answers.split (session[:splitter]) %>
-												<% is_right = @tat.is_right.split (session[:splitter]) %>
-												<% i = 0 %>
-												<% tat_content.each do |a| %>
-												<%= a %>
-												<% 	if is_right[i] == "true" %>
-														<font color="lime"><%= tat_answers[i] %></font>
-												<% 	elsif is_right[i] == "false" %>
-														<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
-												<% 	end %>
-												<% 	i = i + 1 %>
-												<% end %>
-										</div>
-									<% elsif(@tat.step == "init" || @tat.fullText.nil?) %>
-								<div class="offer">
-									<div class="shape">
-										<div class="shape-text">
-											&nbsp;1					
-										</div>
-									</div>
-
-									<div class="offer-content">
-										<div class="field form-group centered">
-											<h4>Telechargez directement un fichier texte</h4>
-											<% f.label :inputFile, class: 'btn btn-default centered' %>
-											<%= f.file_field :inputFile, accept: 'image/png,image/jpg,image/jpeg,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.rtf,.pdf,text/plain', :multiple => false, class: 'btn btn-default centered' %>
-										</div>
-										<br><h4>- OU -</h4><br>
-										<div class="field form-group">
-											<h4>Inserez ici directement un texte</h4>
-											<%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
-											<% f.label :inputText, class: 'control-label' %>
-											
-											<%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
-									 <% elsif (@tat.step == "file") %>
-											<h4><i class="fa fa-check"></i> Extraction effectuée </h4>
-											<%= f.text_area :inputText, class: 'form-control', size: '30x10', value: @tat.fullText %>
+										<div id="tat-back">
+											<% i = 0 %>
+											<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+											<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+											<% j = tat_content.count %>
+											<% tat_content.each do |a| %>
+											<% 	i=i+1 %>
+											<%	if (a.nil? || a == '')%>
+											<%=	 	f.label a %>
+											<%	else%>
+											<%= 		f.label i, a %>
+											<%	end%>
+											<% 	if (i < j) %>
+											<%= 		f.text_field i, class: 'input-tat' %>
+											<% 	end %>
 											<% end %>
-										</div>
-										<div class="actions form-group">
+										</div></div></div></div>
+										<% elsif(@tat.step == "answers") %>
+										<div class="offer">
+										<div class="offer-content">
+										
+											<div class="field form-group centered">
+												<%= f.submit "RAZ", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+												<h4><i class="fa fa-check"></i> Réponses </h4>
+												<br>
+												<div id="tat-back">
+													<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+													<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+													<% user_answers = @tat.user_answers.split (session[:splitter]) %>
+													<% is_right = @tat.is_right.split (session[:splitter]) %>
+													<% i = 0 %>
+													<% tat_content.each do |a| %>
+													<%= a %>
+													<% 	if is_right[i] == "true" %>
+													<font color="lime"><%= tat_answers[i] %></font>
+													<% 	elsif is_right[i] == "false" %>
+													<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
+													<% 	end %>
+													<% 	i = i + 1 %>
 
-										</div>
-										<% end %>
-									</div></div>
-								</div></div>
+													<% end %>
+												</div></div></div></div>
+												<% elsif(@tat.step == "init" || @tat.fullText.nil?) %>
+												<div class="offer">
+													<div class="offer-content">
+														<div class="field form-group centered" data-step="1" data-intro="Sélectionnez le texte à télécharger puis cliquez une première fois sur Génération afin d'importer son contenu dans la zone de texte. Modifiez le texte importé au besoin, sélectionnez vos options de génération puis cliquez une nouvelle fois sur Génération pour obtenir un texte à trous. NB : les mots qui n'appartiennent pas au dictionnaire apparaissent en majuscule dans la zone de texte." data-position='left'> 																
+														<a class="btn btn-large btn-default pull-right" href="javascript:void(0);" onclick="javascript:introJs().start();">Besoin d'aide ?</a>
 
-								<!-- center left--> 
-							</div><!--/row-->
-						</div>
-					</div>
-					<!-- /Main -->
-				</section>
+															<h4>Telechargez directement un fichier texte</h4>
+															<% f.label :inputFile, class: 'btn btn-default centered' %>
+															<%= f.file_field :inputFile, accept: 'image/png,image/jpg,image/jpeg,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.rtf,.pdf,text/plain', :multiple => false, class: 'btn btn-default centered' %>
+														</div>
+														<br><h4>- OU -</h4><br>
+														<div class="field form-group" data-step="2" data-intro="Vous pouvez directement saisir ou coller un texte dans la zone de texte. Sélectionnez ensuite vos options de génération, puis cliquez sur Génération pour obtenir un texte à trous." data-position='left'>
+															<h4>Inserez ici directement un texte</h4>
+															<%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
+															<% f.label :inputText, class: 'control-label' %>
 
-				<footer>
-					<div class="container">
-						<div class="row" style="">
-							<a href="#" class="scrollpoint sp-effect3">
-								<%= image_tag "eco/logo.png", class: "logo" %>
-							</a>
-							<div class="social">
-								<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
-								<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
-								<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg inverse"></i></a>
-							</div>
-							<div class="rights">
-								<p>Copyright &copy; 2015</p>
-							</div>
-						</div>
-					</div>
-				</footer>
+															<%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
+															<div></div></div></div></div>
+															<% elsif (@tat.step == "file") %>
+															<h4><i class="fa fa-check"></i> Extraction effectuée </h4>
+															<%= f.text_area :inputText, class: 'form-control', size: '30x10', value: @tat.fullText %>
 
-			</div>
-			<script>
-				$(document).ready(function() {
-					appMaster.preLoader();
-				});
-			</script>
-		</body>
+															<% end %>
+														
+														
+	
+												</div></div>
 
-		</html>
+												<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
+													<h4><i class="fa fa-gears fa-2x"></i> Paramètres</h4>
+													<hr><br> 
+													<div class="offer" data-step="3" data-intro="Pour un texte à trous plus simple, sélectionnez une proportion de texte masquée plus petite et une marge d'erreur plus élevée (0 - Aucune tolérance sur les erreurs. 1 - Tolérance grammaticale. 2 - Niveau 1 et synonymes tolérées.); le texte généré aura moins de trous, et la correction moins sévère." data-position='bottom'>
+
+
+														<div class="offer-content">
+
+															<div class="form-group">
+																Proportion texte masquée
+																<% if (session[:hiddenText].nil?) %>
+																<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
+																<% else %>
+																<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {:selected => session[:hiddenText]}, { :class => 'form-control'})%>
+																<% end %>
+																<br>
+																<div class="form-group">
+																	Marge d'erreur
+																	<% if (session[:errorMargin].nil?) %>
+																	<%= f.select(:errorMargin, ['0','1','2'], {}, { :class => 'form-control'})%>
+																	<% else %>
+																	<%= f.select(:errorMargin, ['0','1','2'], {:selected => session[:errorMargin]}, { :class => 'form-control'})%>
+																	<% end %>
+																</div></div>
+																<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
+																<% end %>
+															</div>
+														</div></div>
+														<!-- center left--> 
+													</div><!--/row-->
+												</div>
+											</div>
+											<!-- /Main -->
+										</section>
+
+										<footer>
+											<div class="container">
+												<div class="row" style="">
+													<a href="#" class="scrollpoint sp-effect3">
+														<%= image_tag "eco/logo.png", class: "logo" %>
+													</a>
+													<div class="social">
+														<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
+														<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
+														<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg inverse"></i></a>
+													</div>
+													<div class="rights">
+														<p>Copyright &copy; 2015</p>
+													</div>
+												</div>
+											</div>
+										</footer>
+
+									</div>
+									<script>
+										$(document).ready(function() {
+											appMaster.preLoader();
+										});
+									</script>
+								</body>
+
+								</html>
