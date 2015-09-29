@@ -636,13 +636,14 @@ form .form-control {
   font-weight: 300;
 }
 form textarea.form-control {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  border-radius: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
   height: auto;
   line-height: normal;
+  color: black;
 }
 @media screen and (max-width: 640px) {
   .logo {
