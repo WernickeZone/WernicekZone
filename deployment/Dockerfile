@@ -39,10 +39,11 @@ RUN apt-get install -y openjdk-7-jdk\
          libtesseract-dev\
          tesseract-ocr\
          sqlite3\
+         libsqlite3-dev\
         libaspell-dev
-ADD /var/www/WernickeZone /var/www/
-RUN gem install rake -v 10.3.2
+ADD WernickeZone /var/www/
+RUN gem install rake -v 10.4.2
 RUN gem install railties
 RUN cd /var/www/&& bundle install
 RUN cd /var/www/ && bin/rake db:migrate RAILS_ENV=development
-RUN echo "#!/bin/bash \n cd /var/www/ \n rails s -p 80" > /exec.sh
+RUN echo "#!/bin/bash \n cd /var/www/ \n rails s -p 3000" > /exec.sh
