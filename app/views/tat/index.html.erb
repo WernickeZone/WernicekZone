@@ -126,7 +126,11 @@
 													<% 	if is_right[i] == "true" %>
 													<font color="lime"><%= tat_answers[i] %></font>
 													<% 	elsif is_right[i] == "false" %>
+													<% if !user_answers[i].nil? %>
 													<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
+													<%	else%>
+													<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
+													<% 	end %>
 													<% 	end %>
 													<% 	i = i + 1 %>
 
@@ -135,7 +139,7 @@
 												<% elsif(@tat.step == "init" || @tat.fullText.nil?) %>
 												<div class="offer">
 													<div class="offer-content">
-														<div class="field form-group centered" data-step="1" data-intro="Sélectionnez le texte à télécharger puis cliquez une première fois sur Génération afin d'importer son contenu dans la zone de texte. Modifiez le texte importé au besoin, sélectionnez vos options de génération puis cliquez une nouvelle fois sur Génération pour obtenir un texte à trous. NB : les mots qui n'appartiennent pas au dictionnaire apparaissent en majuscule dans la zone de texte." data-position='left'> 																
+														<div class="field form-group centered" data-step="1" data-intro="Sélectionnez le texte à télécharger puis cliquez une première fois sur Génération afin d'importer son contenu dans la zone de texte. Modifiez le texte importé au besoin, sélectionnez vos options de génération puis cliquez une nouvelle fois sur Génération pour obtenir un texte à trous. NB : les mots qui n'appartiennent pas au dictionnaire apparaissent en majuscule dans la zone de texte." data-position='right'> 																
 														<a class="btn btn-large btn-default pull-right" href="javascript:void(0);" onclick="javascript:introJs().start();">Besoin d'aide ?</a>
 
 															<h4>Telechargez directement un fichier texte</h4>
@@ -143,7 +147,7 @@
 															<%= f.file_field :inputFile, accept: 'image/png,image/jpg,image/jpeg,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.rtf,.pdf,text/plain', :multiple => false, class: 'btn btn-default centered' %>
 														</div>
 														<br><h4>- OU -</h4><br>
-														<div class="field form-group" data-step="2" data-intro="Vous pouvez directement saisir ou coller un texte dans la zone de texte. Sélectionnez ensuite vos options de génération, puis cliquez sur Génération pour obtenir un texte à trous." data-position='left'>
+														<div class="field form-group" data-step="2" data-intro="Vous pouvez directement saisir ou coller un texte dans la zone de texte. Sélectionnez ensuite vos options de génération, puis cliquez sur Génération pour obtenir un texte à trous." data-position='right'>
 															<h4>Inserez ici directement un texte</h4>
 															<%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
 															<% f.label :inputText, class: 'control-label' %>
