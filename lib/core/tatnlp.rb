@@ -45,7 +45,7 @@ module TATNLP
       while (total < blank && length > 0)
         a.words.each do |b|
           if total < blank
-            if b.to_s.length == length
+            if (b.to_s.length == length) and (!!b.to_s.match(/^[[:alnum:]]+$/) == true)
               hidden += 1
               res[b.id.to_s] = b.value
             end
