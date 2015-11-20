@@ -1,0 +1,26 @@
+<div class="offer">
+	<div class="offer-content">
+		<div class="field form-group centered">
+			<%= f.submit "Annuler", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+			<h4><i class="fa fa-check"></i> Génération effectuée </h4>
+			<br>
+			<div id="tat-back">
+				<% i = 0 %>
+				<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+				<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+				<% j = tat_content.count %>
+				<% tat_content.each do |a| %>
+				<% 	i=i+1 %>
+				<%	if (a.nil? || a == '')%>
+				<%=	 	f.label a %>
+				<%	else%>
+				<%= 		f.label i, a %>
+				<%	end%>
+				<% 	if (i < j) %>
+				<%= 		f.text_field i, class: 'input-tat' %>
+				<% 	end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
