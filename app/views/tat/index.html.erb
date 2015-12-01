@@ -27,45 +27,8 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="pre-loader">
-		<div class="load-con">
-			<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
-			<div class="spinner">
-				<div class="bounce1"></div>
-				<div class="bounce2"></div>
-				<div class="bounce3"></div>
-			</div>
-		</div>
-	</div>
-
-	<header>
-		<nav class="navbar navbar-default navbar-fixed-top scrolled" role="navigation">
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="fa fa-bars fa-lg"></span>
-					</button>
-					<a class="navbar-brand" href="landing">
-						<%= image_tag "eco/logo.png" , class: "animated fadeInDown" %>
-					</a>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav navbar-right">
-						<li><%= link_to "Retour à l'Accueil", "landing", class:"getApp" %>
-						</li>
-
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-->
-		</nav>
-	</header>
-
+  <%= render "layouts/menu" %>
+  
 	<div class="wrapper">
 		<section>
 			<div class="container">
@@ -126,25 +89,7 @@
 		</div>
 		<!-- /Main -->
 		</section>
-
-		<footer>
-			<div class="container">
-				<div class="row" style="">
-				<a href="#" class="scrollpoint sp-effect3">
-					<%= image_tag "eco/logo.png", class: "logo" %>
-				</a>
-					<div class="social">
-						<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
-						<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
-						<a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg inverse"></i></a>
-					</div>
-					<div class="rights">
-						<p>Copyright &copy; 2015</p>
-					</div>
-				</div>
-			</div>
-		</footer>
-
+	        <%= render "layouts/footer" %>
 	</div>
 	<script>
 		$(document).ready(function() {
