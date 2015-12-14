@@ -51,6 +51,48 @@ module LEXIQUE
     base = getWordBase(word, csv)
     return base
   end
+
+  #output[0] Récupère le type d'un mot (NOM, VER, ADJ, ONO, AUX, ADJ)
+  #output[1] Masculin ou feminin (f, m)
+  #output[2] Singulier ou pluriel (s, p)
+  def self.getWordInfos(word)
+    if (word.nil? || word == '')
+      return nil
+    end
+    csv = getCSV('lib/core/lexique/Lexique380.csv')
+    output = Array.new
+    csv.find do |row|
+      if row[0] == word
+        output[0] = row[2]
+        output[1] = row[3]
+        output[2] = row[4]
+      end
+    end
+    return output;
+  end
+
+  #Renvoie un tableau de la base de chaque mots tirés aléatoirement
+  def self.getRandomWordsByType(type, fm, sp, number)
+    if (type.nil? || type == '')
+      return nil
+    end
+    csv = getCSV('lib/core/lexique/Lexique380.csv')
+    list = csv.find_all { |row| row[2] == type }
+    output = Array.new
+    while output.size < number
+      rWord = list[rand(list.size)]
+      if type == "VER"
+        if rWord[2] == type
+          output.push(rWord[1])
+        end
+      else
+        if rWord[2] == type and rWord[3] == fm and rWord[4] == sp
+          output.push(rWord[0])
+        end
+      end
+    end
+    return output;
+  end
 end
 
 #Exemples 
