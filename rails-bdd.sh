@@ -1,4 +1,6 @@
+
 #!/bin/bash
+
 #Auteur : Florent Grognet
 usage="rails-bdd.sh -r -s -b \n
 		\t-r : remise à zéro de la base de données \n
