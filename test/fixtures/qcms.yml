@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fullText: MyText
+  step: MyText
+  qcm_content: MyText
+  qcm_answers: MyText
+  qcm_choices: MyText
+  user_answers: MyText
+  is_right: MyText
+
+two:
+  fullText: MyText
+  step: MyText
+  qcm_content: MyText
+  qcm_answers: MyText
+  qcm_choices: MyText
+  user_answers: MyText
+  is_right: MyText
