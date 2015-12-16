@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="../assets/eco_outils.css">
 	<link rel="stylesheet" href="../assets/tat.css">
 	<link rel="stylesheet" href="../assets/introjs.css">
+	<link rel="stylesheet" href="../assets/wizard.css">
+	<script src="../assets/wizard.js"></script>
+
 	<script src="../assets/application.js"></script>
 	<script type="text/javascript" src="../assets/modernizr.custom.32033.js"></script>
 	<script src="../assets/jquery-1.11.1.min.js"></script>
@@ -27,18 +30,97 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render "layouts/menu" %>
-  
+	<%= render "layouts/menu" %>
+
 	<div class="wrapper">
-	  <section>
-	    <h1><center><br>QCM, création en cours.</center></h1>
-	  </section>
-	  <%= render "layouts/footer" %>
+
+		<div class="container">
+			<div class="row">
+				<section>
+					<span style="background-color:white; color:#3fa599; font-size:24px; padding:2px;border-radius:2px"> > Générateur QCM</span>
+					<div class="wizard">
+						<div class="wizard-inner">
+							<div class="connecting-line"></div>
+							<ul class="nav nav-tabs" role="tablist">
+
+								<li role="presentation" class="active">
+									<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+										<span class="round-tab">
+											<i class="fa fa fa-file-text"></i>
+										</span>
+									</a>
+								</li>
+
+								<li role="presentation" class="disabled">
+									<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+										<span class="round-tab">
+											<i class="fa fa fa-sliders"></i>
+										</span>
+									</a>
+								</li>
+								<li role="presentation" class="disabled">
+									<a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+										<span class="round-tab">
+											<i class="fa fa-pencil"></i>
+										</span>
+									</a>
+								</li>
+
+								<li role="presentation" class="disabled">
+									<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+										<span class="round-tab">
+											<i class="fa fa-check"></i>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+
+
+						<div class="tab-content">
+							<div class="tab-pane active" role="tabpanel" id="step1">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
+								<p><br>
+								<%= 	render "qcm/init" %>
+							</div>
+							<div class="tab-pane" role="tabpanel" id="step2">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
+								<p>This is step 2</p>
+								<ul class="list-inline pull-right">
+									
+								</ul>
+							</div>
+							<div class="tab-pane" role="tabpanel" id="step3">
+								<h3 style="color:white">Step 3</h3>
+								<p>This is step 3</p>
+								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+									<li><button type="button" class="btn btn-default next-step">Skip</button></li>
+									<li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+								</ul>
+							</div>
+							<div class="tab-pane" role="tabpanel" id="complete">
+								<h3 style="color:white">Complete</h3>
+								<p>You have successfully completed all steps.</p>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
 	</div>
-	<script>
-		$(document).ready(function() {
-			appMaster.preLoader();
-		});
-	</script>
-	</body>
+	<%= render "layouts/footer" %>
+</div>
+<script>
+	$(document).ready(function() {
+		appMaster.preLoader();
+	});
+
+
+</script>
+</body>
+
 </html>
+
