@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708122031) do
+ActiveRecord::Schema.define(version: 20151216102728) do
+
+  create_table "qcms", force: true do |t|
+    t.text     "fullText"
+    t.text     "step"
+    t.text     "qcm_content"
+    t.text     "qcm_answers"
+    t.text     "qcm_choices"
+    t.text     "user_answers"
+    t.text     "is_right"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tats", force: true do |t|
     t.text     "fullText"
