@@ -2,11 +2,11 @@
 
 Prérequis :
 
-	* Debian 8.2 (jessie)
-	* ruby2.1 (la gem birch (0.0.8) est incompatible avec la version 2.2)
+	* Debian 8.2 (jessie) 
+	* ruby2.1 (la gem birch (0.0.8) est incompatible avec la version 2.2) 
 	* ruby2.1-dev
 	* ruby-rails
-    * ruby-rmagick 
+	* ruby-rmagick 
 	* nodejs
 	* nodejs-dev
 	* git
