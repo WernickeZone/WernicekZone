@@ -2,48 +2,46 @@
 
 Prérequis :
 
-	* Debian 8.2 (jessie) 
-	* ruby2.1 (la gem birch (0.0.8) est incompatible avec la version 2.2) 
-	* ruby2.1-dev
-	* ruby-rails
-	* ruby-rmagick 
-	* nodejs
-	* nodejs-dev
-	* git
-	* gcc
-	* build-essential
-	* openjdk-7-jdk
-	* openjdk-7-jre-lib
-	* ImageMagick 
-	* libmagickcore-dev 
-	* libmagick++-dev 
-	* libmagick++-dev 
-	* libleptonica-dev 
-	* zlib1g-dev 
-	* python-pkgconfig
-	* aspell 
-	* aspell-fr 
-	* libaspell-dev
-	* tesseract-ocr
-	* tesseract-ocr-fra 
-	* libtesseract-dev
-	* verbiste
-	* sqlite3
-	* libsqlite3-dev
-	* mongodb
-	* mongodb-server
-	* mongodb-dev
+* Debian 8.2 (jessie)
+* ruby2.1 (la gem birch (0.0.8) est incompatible avec la version 2.2)
+* ruby2.1-dev
+* ruby-rails
+* ruby-rmagick
+* nodejs
+* nodejs-dev
+* git
+* gcc
+* build-essential
+* openjdk-7-jdk
+* openjdk-7-jre-lib
+* ImageMagick 
+* libmagickcore-dev 
+* libmagick++-dev 
+* libmagick++-dev 
+* libleptonica-dev
+* zlib1g-dev
+* python-pkgconfig
+* aspell
+* aspell-fr
+* libaspell-dev
+* tesseract-ocr
+* tesseract-ocr-fra
+* libtesseract-dev
+* verbiste
+* sqlite3
+* libsqlite3-dev
+* mongodb
+* mongodb-server
+* mongodb-dev
 
 Installation :
 
-	* Récupération du dépôt
-	* export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-	* bundle install
+* Récupération du dépôt
+* export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+* bundle install
 
 Lancement :
+* passenger start -p 80 -d
 
-	* passenger start -p 80 -d
-
-Arrêt : 
-	
-	* passenger stop -p 80
+Arrêt :
+* passenger stop -p 80
