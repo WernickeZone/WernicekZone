@@ -4,32 +4,32 @@ class TatController < ApplicationController
     #Initialise les données liées à la session de l'utilisateur
     session[:splitter] = '|-@-|'
     if !session[:key].nil?
-      @tat = Tat.find_by(id: session[:key])
+      @tat = Tat.find(session[:key])
     end
     if @tat.nil?
       @tat = Tat.new
       @tat.step = "init"
-	  @tat.save!
-	  session[:key] = @tat.id
+      @tat.save!
+      session[:key] = @tat.id
     end
   end
 
   def create
     #Controle les données utilisateurs avant la céation du texte à trous
     if !session[:key].nil?
-      @tat = Tat.find_by(id: session[:key])
+      @tat = Tat.find(session[:key])
     end
     if @tat.nil?
       @tat = Tat.new
-	  @tat.step = "init"
+      @tat.step = "init"
       @tat.save!
       session[:key] = @tat.id
-	end
+    end
     session[:hiddenText] = params[:session][:hiddenText]
     session[:errorMargin] = params[:session][:errorMargin]
     #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
     if !params[:session][:inputFile].nil?
-	  @tat.step = "file"
+      @tat.step = "file"
       @tat.save!
       upload
     elsif !params[:session]["1"].nil? && @tat.step == "tat"
