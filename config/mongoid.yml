@@ -98,7 +98,10 @@ development:
         # The file containing a set of concatenated certification authority certifications
         # used to validate certs passed from the other end of the connection.
         # ssl_ca_cert: /path/to/ca.cert
-
+    nlp:
+      database: nlp
+      hosts:
+        - localhost:27017
 
   # Configure Mongoid specific options. (optional)
   options:
