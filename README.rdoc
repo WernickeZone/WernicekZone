@@ -1,28 +1,47 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prérequis :
 
-Things you may want to cover:
+* Debian 8.2 (jessie)
+* ruby2.1 (la gem birch (0.0.8) est incompatible avec la version 2.2)
+* ruby2.1-dev
+* ruby-rails
+* ruby-rmagick
+* nodejs
+* nodejs-dev
+* git
+* gcc
+* build-essential
+* openjdk-7-jdk
+* openjdk-7-jre-lib
+* ImageMagick 
+* libmagickcore-dev 
+* libmagick++-dev 
+* libmagick++-dev 
+* libleptonica-dev
+* zlib1g-dev
+* python-pkgconfig
+* aspell
+* aspell-fr
+* libaspell-dev
+* tesseract-ocr
+* tesseract-ocr-fra
+* libtesseract-dev
+* verbiste
+* sqlite3
+* libsqlite3-dev
+* mongodb
+* mongodb-server
+* mongodb-dev
 
-* Ruby version
+Installation :
 
-* System dependencies
+* Récupération du dépôt
+* export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+* bundle install
 
-* Configuration
+Lancement :
+* passenger start -p 80 -d
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Arrêt :
+* passenger stop -p 80

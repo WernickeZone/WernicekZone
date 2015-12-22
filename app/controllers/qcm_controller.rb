@@ -4,7 +4,7 @@ class QcmController < ApplicationController
     #Initialise les données liées à la session de l'utilisateur
     session[:splitter] = '|-@-|'
     if !session[:key].nil?
-      @qcm = Qcm.find_by(id: session[:key])
+      @qcm = Qcm.find(id: session[:key])
     end
     if @qcm.nil?
       @qcm = Qcm.new
@@ -17,7 +17,7 @@ class QcmController < ApplicationController
   def create
     #Controle les données utilisateurs avant la céation du texte à trous
     if !session[:key].nil?
-      @qcm = Qcm.find_by(id: session[:key])
+      @qcm = Qcm.find(id: session[:key])
     end
     if @qcm.nil?
       @qcm = Qcm.new
