@@ -21,6 +21,9 @@ module LEXIQUE
       return nil
     end
     lex = Lexique.find_by(mot: word)
+    if lex.nil?
+      return nil
+    end
     return lex.infinitif
   end
 
@@ -30,6 +33,9 @@ module LEXIQUE
       return nil
     end
     lex = Lexique.where(infinitif: base)
+    if lex.nil?
+      return nil
+    end
     output = Array.new
     lex.each do |l|
       output.push l.mot
@@ -55,6 +61,9 @@ module LEXIQUE
       return nil
     end
     lex = Lexique.find_by(mot: word)
+    if lex.nil?
+      return nil
+    end
     output = Array.new
     output[0] = lex.type
     output[1] = lex.genre
@@ -68,6 +77,9 @@ module LEXIQUE
       return nil
     end
     lex = Lexique.where(type: type)
+    if lex.nil?
+      return nil
+    end
     output = Array.new
     while output.size < number
       rLex = lex[rand(lex.count)]

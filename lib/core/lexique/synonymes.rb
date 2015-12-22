@@ -21,6 +21,9 @@ module SYN
       return nil
     end
     syn = Synonyme.find_by(mot: word)
+    if syn.nil?
+      return nil
+    end
     output = Array.new
     for i in 1..186 do
       name = "syn" + i.to_s

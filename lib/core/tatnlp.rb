@@ -150,6 +150,9 @@ module TATNLP
     require 'core/lexique/lexique.rb'
     base = LEXIQUE.getWordBase(tat_word)
     syns = SYN.getSynonyms(base)
+    if syns.nil?
+      return "false"
+    end
     syns.each do |syn|
       if (verifyLexique(syn, user_word) == "true")
         return "true"
