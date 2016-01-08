@@ -81,28 +81,25 @@
 						<div class="tab-content">
 							<div class="tab-pane active" role="tabpanel" id="step1">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
-								<p><br>
-								<%= 	render "qcm/init" %>
+								<%= render "qcm/init" %>
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step2">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
-								<p>This is step 2</p>
 								<ul class="list-inline pull-right">
-									
+									<%= render "qcm/file" %>
 								</ul>
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step3">
-								<h3 style="color:white">Step 3</h3>
-								<p>This is step 3</p>
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
 								<ul class="list-inline pull-right">
-									<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-									<li><button type="button" class="btn btn-default next-step">Skip</button></li>
-									<li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+									<%= render "qcm/qcm" %>
 								</ul>
 							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">
-								<h3 style="color:white">Complete</h3>
-								<p>You have successfully completed all steps.</p>
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
+								<ul class="list-inline pull-right">
+									<%= render "qcm/answers" %>
+								</ul>
 							</div>
 							<div class="clearfix"></div>
 						</div>

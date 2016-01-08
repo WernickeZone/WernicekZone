@@ -12,6 +12,12 @@ class QcmController < ApplicationController
       @qcm.save!
       session[:key] = @qcm.id
     end
+    ###
+    respond_to do |format|
+     format.html #responds with default html file
+     format.js #this will be the javascript file we respond with
+    end
+    ###
   end
 
   def create
