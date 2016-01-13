@@ -1,6 +1,8 @@
 # coding: utf-8
 class QcmController < ApplicationController
   def index
+    #Problème d'id qui ne reste pas stocké et change à chaque refresh
+    
     #Initialise les données liées à la session de l'utilisateur
     session[:splitter] = '|-@-|'
     if !session[:key].nil?
@@ -74,7 +76,7 @@ class QcmController < ApplicationController
   def qcmGeneration
     #Générer le texte à trous et l'envoie le stocke dans un object temporaire disponible pour le front-end
     require 'core/qcmnlp.rb'
-    array_qcm = QCMNlp.generateQcm(@qcm.fullText, session[:hiddenText])
+    array_qcm = QCMNlp.generateQCM(@qcm.fullText, session[:hiddenText])
     @qcm.qcm_answers = array_qcm[1];
     if (!array_qcm.nil?)
       array_qcm_choices = Array.new
