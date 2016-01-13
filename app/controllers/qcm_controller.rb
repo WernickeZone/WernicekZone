@@ -5,8 +5,15 @@ class QcmController < ApplicationController
     
     #Initialise les données liées à la session de l'utilisateur
     session[:splitter] = '|-@-|'
+
+    if !session[:sam].nil? && !Qcm.find(session[:key]).nil?
+      session[:sam] += 1
+    else
+      session[:sam] = 1
+    end
+
     if !session[:key].nil?
-      @qcm = Qcm.find(id: session[:key])
+      @qcm = Qcm.find(session[:key])
     end
     if @qcm.nil?
       @qcm = Qcm.new
@@ -15,17 +22,19 @@ class QcmController < ApplicationController
       session[:key] = @qcm.id
     end
     ###
+=begin
     respond_to do |format|
      format.html #responds with default html file
      format.js #this will be the javascript file we respond with
     end
+=end
     ###
   end
 
   def create
     #Controle les données utilisateurs avant la céation du texte à trous
     if !session[:key].nil?
-      @qcm = Qcm.find(id: session[:key])
+      @qcm = Qcm.find(session[:key])
     end
     if @qcm.nil?
       @qcm = Qcm.new
@@ -82,7 +91,14 @@ class QcmController < ApplicationController
       array_qcm_choices = Array.new
       array_qcm[1].each do |q|
         array_qcm_choices.push q
-        array_qcm_choices.push QCMNlp.generateAnswers(q)
+
+        # parce que QCMNlp.generateAnswers(q) ne marche pas
+        begin
+          array_qcm_choices.push QCMNlp.generateAnswers(q)
+        rescue Exception => e
+          array_qcm_choices.push ["erreur", "erreur"]
+        end
+
       end
       @qcm.qcm_content = array_qcm[0].join(session[:splitter])
       @qcm.qcm_choices = array_qcm_choices[1].join(session[:splitter])
@@ -102,7 +118,7 @@ class QcmController < ApplicationController
       array_isRight = Array.new
       j = qcm_answers.count;
       for i in 1..j
-	user_answers.push params[:session][i.to_s]
+	      user_answers.push params[:session][i.to_s]
         if user_answers[i - 1] == qcm_answers[i - 1]
           array_isRight.push "true"
         else

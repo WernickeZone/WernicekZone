@@ -1,1 +1,10 @@
-FILE
+<%= form_for(:session) do |f| %>
+<h4><i class="fa fa-check"></i> Extraction effectuée </h4>
+<%= f.text_area :inputText, class: 'form-control', size: '30x10', value: @qcm.fullText %>
+									<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
+<ul class="list-inline pull-right">
+	<br>
+	<li><button type="submit" class="btn btn-default next-step"> <i class="fa fa-caret-square-o-right"></i> Étape suivante</button></li>
+</ul>
+
+<% end %>
