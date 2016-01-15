@@ -4,7 +4,9 @@ resources :selection
 resources :landing
 resources :tat, :path => "texte-a-trous", via: [:get, :post]
 get 'tat', to: redirect('/texte-a-trous')
-resources :qcm
+resources :qcm, :path => "qcm", via: [:get, :post]
+get 'qcm', to: redirect('/qcm')
+
 root :to => 'landing#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

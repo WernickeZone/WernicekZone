@@ -43,8 +43,8 @@
 							<div class="connecting-line"></div>
 							<ul class="nav nav-tabs" role="tablist">
 
-								<li role="presentation" class="active">
-									<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+								<li role="presentation" class="disabled">
+									<a href="#init" data-toggle="tab" aria-controls="init" role="tab" title="Step 1">
 										<span class="round-tab">
 											<i class="fa fa fa-file-text"></i>
 										</span>
@@ -52,14 +52,14 @@
 								</li>
 
 								<li role="presentation" class="disabled">
-									<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+									<a href="#file" data-toggle="tab" aria-controls="file" role="tab" title="Step 2">
 										<span class="round-tab">
 											<i class="fa fa fa-sliders"></i>
 										</span>
 									</a>
 								</li>
 								<li role="presentation" class="disabled">
-									<a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+									<a href="#qcm" data-toggle="tab" aria-controls="qcm" role="tab" title="Step 3">
 										<span class="round-tab">
 											<i class="fa fa-pencil"></i>
 										</span>
@@ -67,7 +67,7 @@
 								</li>
 
 								<li role="presentation" class="disabled">
-									<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+									<a href="#answers" data-toggle="tab" aria-controls="answers" role="tab" title="Complete">
 										<span class="round-tab">
 											<i class="fa fa-check"></i>
 										</span>
@@ -75,35 +75,41 @@
 								</li>
 							</ul>
 						</div>
-
-
+<p> TEST d'affichage de la session : <%= session[:key] %></p>
+<p> TEST d'affichage de la session : <%= session[:sam] %></p>
+<p> TEST d'affichage du qcm : <%= @qcm.id %></p>
+<p> TEST d'affichage du qcm : <%= @qcm.step %></p>
 
 						<div class="tab-content">
-							<div class="tab-pane active" role="tabpanel" id="step1">
+							<% if(@qcm.step == "init") %>
+
+							<div class="tab-pane" role="tabpanel" id="init">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
-								<p><br>
-								<%= 	render "qcm/init" %>
+									<%= render "qcm/init" %>
 							</div>
-							<div class="tab-pane" role="tabpanel" id="step2">
+							<% elsif(@qcm.step == "file") %>
+
+							<div class="tab-pane" role="tabpanel" id="file">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
-								<p>This is step 2</p>
 								<ul class="list-inline pull-right">
-									
+									<%= render "qcm/file" %>
 								</ul>
 							</div>
-							<div class="tab-pane" role="tabpanel" id="step3">
-								<h3 style="color:white">Step 3</h3>
-								<p>This is step 3</p>
+							<% elsif(@qcm.step == "qcm") %>
+							<div class="tab-pane" role="tabpanel" id="qcm">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
 								<ul class="list-inline pull-right">
-									<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-									<li><button type="button" class="btn btn-default next-step">Skip</button></li>
-									<li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+									<%= render "qcm/qcm" %>
 								</ul>
 							</div>
-							<div class="tab-pane" role="tabpanel" id="complete">
-								<h3 style="color:white">Complete</h3>
-								<p>You have successfully completed all steps.</p>
+							<% elsif (@qcm.step == "answers") %>
+							<div class="tab-pane" role="tabpanel" id="answers">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
+								<ul class="list-inline pull-right">
+									<%= render "qcm/answers" %>
+								</ul>
 							</div>
+							<% end %>
 							<div class="clearfix"></div>
 						</div>
 					</form>
@@ -116,6 +122,12 @@
 <script>
 	$(document).ready(function() {
 		appMaster.preLoader();
+
+		var tab = $("a[aria-controls='<%= @qcm.step%>']")
+		tab.parent().toggleClass("active").toggleClass("disabled")
+
+		var div = $("div[id='<%= @qcm.step%>']").toggleClass("active")
+
 	});
 
 
