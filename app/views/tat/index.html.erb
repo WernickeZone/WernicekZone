@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="../assets/eco_outils.css">
 	<link rel="stylesheet" href="../assets/tat.css">
 	<link rel="stylesheet" href="../assets/introjs.css">
+	<link rel="stylesheet" href="../assets/wizard.css">
+	<script src="../assets/wizard.js"></script>
+
 	<script src="../assets/application.js"></script>
 	<script type="text/javascript" src="../assets/modernizr.custom.32033.js"></script>
 	<script src="../assets/jquery-1.11.1.min.js"></script>
@@ -27,75 +30,104 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render "layouts/menu" %>
-  
+	<%= render "layouts/menu" %>
+
 	<div class="wrapper">
-		<section>
-			<div class="container">
-				<div class="row" style="">
 
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+		<div class="container">
+			<div class="row">
+				<section>
+					<span style="background-color:white; color:#3fa599; font-size:24px; padding:2px;border-radius:2px"> > Générateur de texte à trous </span>
+					<div class="wizard">
+						<div class="wizard-inner">
+							<div class="connecting-line"></div>
+							<ul class="nav nav-tabs" role="tablist">
 
-						<h4><i class="fa fa-spinner fa-2x"></i> Générateur de Texte à Trous</h4>
-						<hr>
-						<br> 
+								<li role="presentation" class="disabled">
+									<a href="#init" data-toggle="tab" aria-controls="init" role="tab" title="Step 1">
+										<span class="round-tab">
+											<i class="fa fa fa-file-text"></i>
+										</span>
+									</a>
+								</li>
 
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<% @tat.step %>
-							<%= form_for :session do |f| %>
-							<% if(@tat.step == "tat" && !@tat.tat_content.nil? && @tat.tat_content != "") %>
-								<%= 	render "tat/tat", :f => f, :tat => @tat %>
-								<% elsif(@tat.step == "answers") %>
-								<%= 	render "tat/answers", :f => f, :tat => @tat %>
-								<% elsif(@tat.step == "init" || @tat.fullText.nil?) %>
-								<%= 	render "tat/init", :f => f %>
-								<% elsif (@tat.step == "file") %>
-								<%= 	render "tat/file", :f => f %>
-								<% end %>
+								<li role="presentation" class="disabled">
+									<a href="#file" data-toggle="tab" aria-controls="file" role="tab" title="Step 2">
+										<span class="round-tab">
+											<i class="fa fa fa-sliders"></i>
+										</span>
+									</a>
+								</li>
+								<li role="presentation" class="disabled">
+									<a href="#tat" data-toggle="tab" aria-controls="tat" role="tab" title="Step 3">
+										<span class="round-tab">
+											<i class="fa fa-pencil"></i>
+										</span>
+									</a>
+								</li>
+
+								<li role="presentation" class="disabled">
+									<a href="#answers" data-toggle="tab" aria-controls="answers" role="tab" title="Complete">
+										<span class="round-tab">
+											<i class="fa fa-check"></i>
+										</span>
+									</a>
+								</li>
+							</ul>
 						</div>
-					</div>
 
-					<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
-					<h4><i class="fa fa-gears fa-2x"></i>Paramètres</h4>
-					<hr><br> 
-						<div class="offer" data-step="3" data-intro="Pour un texte à trous plus simple, sélectionnez une proportion de texte masquée plus basse et une marge d'erreur plus élevée (0 - Aucune tolérance sur les erreurs. 1 - Tolérance grammaticale. 2 - Niveau 1 + synonymes.); le texte généré aura moins de trous, et la correction sera moins sévère." data-position='bottom'>
-							<div class="offer-content">
-<p> TEST d'affichage de la session : <%= session[:key] %></p>
+						<div class="tab-content">
+							<% if(@tat.step == "init" || @tat.fullText.nil?) %>
 
-								<div class="form-group">
-									Proportion de texte masquée
-									<% if (session[:hiddenText].nil?) %>
-									<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
-									<% else %>
-									<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {:selected => session[:hiddenText]}, { :class => 'form-control'})%>
-									<% end %>
-									<br>
-									<div class="form-group">
-										Marge d'erreur
-										<% if (session[:errorMargin].nil?) %>
-										<%= f.select(:errorMargin, ['0','1','2'], {}, { :class => 'form-control'})%>
-										<% else %>
-										<%= f.select(:errorMargin, ['0','1','2'], {:selected => session[:errorMargin]}, { :class => 'form-control'})%>
-										<% end %>
-									</div>
-								</div>
-								<%= f.submit "Génération", class: 'btn btn-default inverse pull-left' %>
-								<% end %>
+							<div class="tab-pane" role="tabpanel" id="init">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
+									<%= render "tat/init" %>
 							</div>
+
+							<% elsif(@tat.step == "file") %>
+
+							<div class="tab-pane" role="tabpanel" id="file">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
+									<%= render "tat/file" %>
+							</div>
+
+							<% elsif(@tat.step == "tat" && !@tat.tat_content.nil? && @tat.tat_content != "") %>
+
+							<div class="tab-pane" role="tabpanel" id="tat">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
+									<%= render "tat/tat" %>
+							</div>
+
+							<% elsif (@tat.step == "answers") %>
+							
+							<div class="tab-pane" role="tabpanel" id="answers">
+								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
+									<%= render "tat/answers" %>
+							</div>
+							<% end %>
+							<div class="clearfix"></div>
 						</div>
-					</div>
-					<!-- center left--> 
-				</div><!--/row-->
-			</div>
+					</form>
+				</div>
+			</section>
 		</div>
-		<!-- /Main -->
-		</section>
-	        <%= render "layouts/footer" %>
 	</div>
-	<script>
-		$(document).ready(function() {
-			appMaster.preLoader();
-		});
-	</script>
-	</body>
+	<%= render "layouts/footer" %>
+</div>
+<script>
+	$(document).ready(function() {
+		appMaster.preLoader();
+
+		var tab = $("a[aria-controls='<%= @tat.step%>']")
+		tab.parent().toggleClass("active").toggleClass("disabled")
+
+		var div = $("div[id='<%= @tat.step%>']").toggleClass("active")
+
+	});
+
+
+</script>
+</body>
+
 </html>
+

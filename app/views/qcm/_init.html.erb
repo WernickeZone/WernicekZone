@@ -8,7 +8,7 @@
 <br><h4>- OU -</h4><br>
 <div class="field form-group" data-step="2" data-intro="Vous pouvez directement saisir ou coller un texte dans la zone de texte. Sélectionnez ensuite vos options de génération, puis cliquez sur Génération pour obtenir un texte à trous." data-position='right'>
 	<h5>Insérez directement votre texte</h5>
-	<%= f.submit "RAZ zone de texte", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
+	<%= f.submit "Remise à zéro", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %><br><br>
 	<% f.label :inputText, class: 'control-label' %>
 	<%= f.text_area :inputText, class: 'form-control', size: '30x10' %>
 	<div></div>

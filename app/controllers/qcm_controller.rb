@@ -42,17 +42,17 @@ class QcmController < ApplicationController
       @qcm.save!
       session[:key] = @qcm.id
     end
-    session[:hiddenText] = params[:session][:hiddenText]
+    session[:hiddenText] = params[:session][:hiddenText]  if params[:session]
     #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
-    if !params[:session][:inputFile].nil?
+    if  params[:session] && !params[:session][:inputFile].nil?
       @qcm.step = "file"
       @qcm.save!
       upload
-    elsif !params[:session]["1"].nil? && @qcm.step == "qcm"
+    elsif params[:session] && !params[:session]["1"].nil? && @qcm.step == "qcm"
       @qcm.step = "answers"
       @qcm.save!
       qcmVerify
-    elsif !params[:session][:inputText].nil? && params[:session][:inputText] != ""
+    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != ""
       @qcm.fullText = params[:session][:inputText]
       @qcm.step = "qcm"
       @qcm.save!
