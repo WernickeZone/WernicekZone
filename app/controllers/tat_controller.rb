@@ -25,9 +25,6 @@ class TatController < ApplicationController
       @tat.save!
       session[:key] = @tat.id
     end
-    # Obligée d'ajouter "if params[:session]" >> sinon erreur
-    session[:hiddenText] = params[:session][:hiddenText] if params[:session]
-    session[:errorMargin] = params[:session][:errorMargin] if params[:session]
     #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
     if params[:session] && !params[:session][:inputFile].nil?
       @tat.step = "file"
@@ -43,6 +40,8 @@ class TatController < ApplicationController
       @tat.save!
     elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @tat.step == "file"
       @tat.fullText = params[:session][:inputText]
+      session[:hiddenText] = params[:session][:hiddenText]
+      session[:errorMargin] = params[:session][:errorMargin]
       @tat.step = "tat"
       @tat.save!
       tatGeneration
