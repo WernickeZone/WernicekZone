@@ -37,12 +37,16 @@ class TatController < ApplicationController
       @tat.step = "answers"
       @tat.save!
       tatVerify
-    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != ""
-	  @tat.fullText = params[:session][:inputText]
-	  @tat.step = "tat"
+    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @tat.step == "init"
+      @tat.fullText = params[:session][:inputText]
+      @tat.step = "file"
+      @tat.save!
+    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @tat.step == "file"
+      @tat.fullText = params[:session][:inputText]
+      @tat.step = "tat"
       @tat.save!
       tatGeneration
-	else
+    else
       @tat.step = "init"
       @tat.save!
     end
@@ -75,28 +79,28 @@ class TatController < ApplicationController
     if (!array_tat.nil?)
       @tat.tat_content = array_tat[0].join(session[:splitter])
       @tat.tat_answers = array_tat[1].join(session[:splitter])
-	else
+    else
       @tat.step = "init"
     end
-	@tat.save!
+    @tat.save!
   end
 
   def tatVerify
     #Vérifie les réponses du texte à trous et stocke la correction dans un objet temporaire pour le front-end
     require 'core/tatnlp.rb'
-	if (@tat.tat_answers.nil?)
-		@tat.step = "answers is null"
-	else
-		tat_answers = @tat.tat_answers.split (session[:splitter])
-		user_answers = Array.new
-		j = tat_answers.count
-		for i in 1..j
-			user_answers.push params[:session][i.to_s]
-		end
-		array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers, session[:errorMargin])
-		@tat.user_answers = user_answers.join(session[:splitter])
-		@tat.is_right = array_isRight.join(session[:splitter])
-	end
-	@tat.save!
+    if (@tat.tat_answers.nil?)
+      @tat.step = "answers is null"
+    else
+      tat_answers = @tat.tat_answers.split (session[:splitter])
+      user_answers = Array.new
+      j = tat_answers.count
+      for i in 1..j
+	user_answers.push params[:session][i.to_s]
+      end
+      array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers, session[:errorMargin])
+      @tat.user_answers = user_answers.join(session[:splitter])
+      @tat.is_right = array_isRight.join(session[:splitter])
+    end
+    @tat.save!
   end
 end
