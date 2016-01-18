@@ -1,0 +1,36 @@
+<%= form_for(:session) do |f| %>
+<div class="offer">
+	<div class="offer-content">
+		<div class="field form-group centered">
+			<h4><i class="fa fa-check"></i> Réponses </h4>
+			<br>
+			<div id="qcm-back">
+				<% qcm_content = @qcm.qcm_content.split (session[:splitter]) %>
+				<% qcm_answers = @qcm.qcm_answers.split (session[:splitter]) %>
+				<% user_answers = @qcm.user_answers.split (session[:splitter]) %>
+				<% is_right = @qcm.is_right.split (session[:splitter]) %>
+				<% i = 0 %>
+				<% qcm_content.each do |a| %>
+				<%= a %>
+				<% 	if is_right[i] == "true" %>
+						<font color="lime"><%= qcm_answers[i] %></font>
+				<% 	elsif is_right[i] == "false" %>
+				<% 		if !user_answers[i].nil? %>
+							<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= qcm_answers[i] %></font></span>
+				<%		else%>
+							<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= qcm_answers[i] %></font></span>
+				<% 		end %>
+				<% 	else  %>
+
+				<% 	end %>
+				<% 	i = i + 1 %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<ul class="list-inline pull-right">
+	<br>
+	<li><button type="submit" class="btn btn-default next-step" onclick="this.form.reset(); document.getElementById('session_inputText').value=''"> <i class="fa fa-refresh"></i> Remise à zéro </button></li>
+</ul>
+<% end %>

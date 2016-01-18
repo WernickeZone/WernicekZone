@@ -1,0 +1,25 @@
+<div class="row" style="">
+	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-left">
+		<%= form_for(:session) do |f| %>
+		<h4><i class="fa fa-check"></i> Extraction effectuée </h4>
+		<%= f.text_area :inputText, class: 'form-control', size: '30x10', value: @qcm.fullText %>
+											
+		<ul class="list-inline pull-right">
+			<br>
+			<li><button type="submit" class="btn btn-default next-step"> <i class="fa fa-caret-square-o-right"></i> Étape suivante</button></li>
+		</ul>
+	</div>
+	<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
+		<h4><i class="fa fa-gears fa-2x"></i>Paramètres</h4>
+		<hr><br> 
+		<div class="offer" data-step="3" data-intro="Pour un texte à trous plus simple, sélectionnez une proportion de texte masquée plus basse et une marge d'erreur plus élevée (0 - Aucune tolérance sur les erreurs. 1 - Tolérance grammaticale. 2 - Niveau 1 + synonymes.); le texte généré aura moins de trous, et la correction sera moins sévère." data-position='bottom'>
+			<div class="offer-content">
+
+				<div class="form-group">
+					<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>

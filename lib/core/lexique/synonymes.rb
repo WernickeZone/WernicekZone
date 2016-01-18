@@ -1,39 +1,39 @@
 # coding: utf-8
 module SYN
 
-  #Récupère la base de données au format CSV
-  def self.getCSV(fileName)
-    if (fileName.nil? || fileName == '')
-      return nil
-    end
-    require 'csv'
-    csv = CSV.read(fileName, col_sep: ';')
-    return csv
-  end
+  #Instancie la classe Synonyme servant d'interface à la collection Synonymes
+  class Synonyme
+    include Mongoid::Document
+    store_in database: "nlp", collection: "Synonymes"
+    field :mot, type: String
 
+    for i in 1..186 do
+      name = "syn" + i.to_s
+      field name.to_sym, type: String
+    end
+    
+    attr_readonly :mot    
+  end
+  
   #Récupère la liste des synonymes d'un mot en question
-  def self.getWordList(word, csv)
+  def self.getWordList(word)
     if (word.nil? || word == '')
       return nil
     end
-    words = csv.find { |row| row[0] == word }
-    return words
-  end
-
-  #Cette fonction remet la liste des mots en forme
-  def self.cleanWordList(wordList)
-    if (wordList.nil?)
+    syn = Synonyme.find_by(mot: word)
+    if syn.nil?
       return nil
     end
-    words = Array.new
-    wordList.each do |word|
-      if (word.nil?)
-        return words
+    output = Array.new
+    for i in 1..186 do
+      name = "syn" + i.to_s
+      if (syn.mot.nil? or syn.mot == '')
+        return output
       else
-        words.push word
+        output.push(syn.mot)
       end
     end
-    return words
+    return output
   end
 
   #Surcouche des fonctions précédentes et récuperant la liste complète des synonymes
@@ -41,9 +41,7 @@ module SYN
     if (word.nil? || word == '')
       return nil
     end
-    csv = getCSV('lib/core/lexique/thes_fr.csv')
-    wordList = getWordList(word, csv)
-    wordList = cleanWordList(wordList)
+    wordList = getWordList(word)
     return wordList
   end
 end

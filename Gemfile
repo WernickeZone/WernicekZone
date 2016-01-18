@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 source 'http://gems.github.com'
+gem "passenger"
+gem "mongoid"
 gem 'twitter-bootstrap-rails'
 gem "therubyracer"
 gem "less-rails"

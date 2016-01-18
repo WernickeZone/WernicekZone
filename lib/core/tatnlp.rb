@@ -148,8 +148,11 @@ module TATNLP
     #Vérifie la grammaire et les synonymes d'un mot
     require 'core/lexique/synonymes.rb'
     require 'core/lexique/lexique.rb'
-    base = LEXIQUE.getWordBase2(tat_word)
+    base = LEXIQUE.getWordBase(tat_word)
     syns = SYN.getSynonyms(base)
+    if syns.nil?
+      return "false"
+    end
     syns.each do |syn|
       if (verifyLexique(syn, user_word) == "true")
         return "true"

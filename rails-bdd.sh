@@ -1,6 +1,4 @@
-
 #!/bin/bash
-
 #Auteur : Florent Grognet
 usage="rails-bdd.sh -r -s -b \n
 		\t-r : remise à zéro de la base de données \n
@@ -15,7 +13,7 @@ b=0
  while getopts ":rsb" option
  do
      case $option in
-         r)
+	 r)
              r=1
              ;;
 	 s)
