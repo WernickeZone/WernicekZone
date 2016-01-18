@@ -1,7 +1,3 @@
-<p> <%= @qcm.qcm_content %></p>
-<p> <%= @qcm.qcm_answers %></p>
-<p> <%= @qcm.is_right %></p>
-
 <%= form_for(:session) do |f| %>
 <div class="offer">
 	<div class="offer-content">
@@ -35,6 +31,6 @@
 </div>
 <ul class="list-inline pull-right">
 	<br>
-	<li><button type="submit" class="btn btn-default next-step"> <i class="fa fa-caret-square-o-right"></i> Étape suivante</button></li>
+	<li><button type="submit" class="btn btn-default next-step" onclick="this.form.reset(); document.getElementById('session_inputText').value=''"> <i class="fa fa-refresh"></i> Remise à zéro </button></li>
 </ul>
 <% end %>

@@ -1,29 +1,31 @@
-<div class="offer">
-	<div class="offer-content">
-		<div class="field form-group centered">
-			<%= f.submit "Remise à zéro", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
-			<h4><i class="fa fa-check"></i> Réponses </h4>
-			<br>
-			<div id="tat-back">
-				<% tat_content = @tat.tat_content.split (session[:splitter]) %>
-				<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
-				<% user_answers = @tat.user_answers.split (session[:splitter]) %>
-				<% is_right = @tat.is_right.split (session[:splitter]) %>
-				<% i = 0 %>
-				<% tat_content.each do |a| %>
-				<%= a %>
-				<% 	if is_right[i] == "true" %>
-						<font color="lime"><%= tat_answers[i] %></font>
-				<% 	elsif is_right[i] == "false" %>
-				<% 		if !user_answers[i].nil? %>
-							<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
-				<%		else%>
-							<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
-				<% 		end %>
-				<% 	end %>
-				<% 	i = i + 1 %>
-				<% end %>
+<%= form_for(:session) do |f| %>
+	<div class="offer">
+		<div class="offer-content">
+			<div class="field form-group centered">
+				<%= f.submit "Remise à zéro", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+				<h4><i class="fa fa-check"></i> Réponses </h4>
+				<br>
+				<div id="tat-back">
+					<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+					<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+					<% user_answers = @tat.user_answers.split (session[:splitter]) %>
+					<% is_right = @tat.is_right.split (session[:splitter]) %>
+					<% i = 0 %>
+					<% tat_content.each do |a| %>
+					<%= a %>
+					<% 	if is_right[i] == "true" %>
+							<font color="lime"><%= tat_answers[i] %></font>
+					<% 	elsif is_right[i] == "false" %>
+					<% 		if !user_answers[i].nil? %>
+								<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
+					<%		else%>
+								<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
+					<% 		end %>
+					<% 	end %>
+					<% 	i = i + 1 %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<% end %>

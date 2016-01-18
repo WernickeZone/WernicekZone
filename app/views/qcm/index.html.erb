@@ -75,10 +75,6 @@
 								</li>
 							</ul>
 						</div>
-<p> TEST d'affichage de la session : <%= session[:key] %></p>
-<p> TEST d'affichage de la session : <%= session[:sam] %></p>
-<p> TEST d'affichage du qcm : <%= @qcm.id %></p>
-<p> TEST d'affichage du qcm : <%= @qcm.step %></p>
 
 						<div class="tab-content">
 							<% if(@qcm.step == "init") %>
@@ -91,23 +87,17 @@
 
 							<div class="tab-pane" role="tabpanel" id="file">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
-								<ul class="list-inline pull-right">
 									<%= render "qcm/file" %>
-								</ul>
 							</div>
 							<% elsif(@qcm.step == "qcm") %>
 							<div class="tab-pane" role="tabpanel" id="qcm">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
-								<ul class="list-inline pull-right">
 									<%= render "qcm/qcm" %>
-								</ul>
 							</div>
 							<% elsif (@qcm.step == "answers") %>
 							<div class="tab-pane" role="tabpanel" id="answers">
 								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
-								<ul class="list-inline pull-right">
 									<%= render "qcm/answers" %>
-								</ul>
 							</div>
 							<% end %>
 							<div class="clearfix"></div>
