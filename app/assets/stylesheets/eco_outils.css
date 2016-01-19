@@ -580,7 +580,7 @@ section::after {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  padding: 5px 25px;
+ 
 }
 .btn.btn-primary {
   border: 2px solid #ffffff;

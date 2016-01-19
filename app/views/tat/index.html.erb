@@ -80,28 +80,30 @@
 							<% if(@tat.step == "init" || @tat.fullText.nil?) %>
 
 							<div class="tab-pane" role="tabpanel" id="init">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 1 </h3>
 									<%= render "tat/init" %>
 							</div>
 
 							<% elsif(@tat.step == "file") %>
 
 							<div class="tab-pane" role="tabpanel" id="file">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
+							<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 2 </h3>
+								</div></div></div></div>
 									<%= render "tat/file" %>
 							</div>
 
 							<% elsif(@tat.step == "tat" && !@tat.tat_content.nil? && @tat.tat_content != "") %>
 
 							<div class="tab-pane" role="tabpanel" id="tat">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 3</h3>
 									<%= render "tat/tat" %>
 							</div>
 
 							<% elsif (@tat.step == "answers") %>
 							
 							<div class="tab-pane" role="tabpanel" id="answers">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 4</h3>
 									<%= render "tat/answers" %>
 							</div>
 							<% end %>
