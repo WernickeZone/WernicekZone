@@ -42,8 +42,6 @@ class QcmController < ApplicationController
       @qcm.save!
       session[:key] = @qcm.id
     end
-    session[:hiddenText] = params[:session][:hiddenText]  if params[:session]
-    #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
     if  params[:session] && !params[:session][:inputFile].nil?
       @qcm.step = "file"
       @qcm.save!
@@ -52,7 +50,12 @@ class QcmController < ApplicationController
       @qcm.step = "answers"
       @qcm.save!
       qcmVerify
-    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != ""
+    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @qcm.step == "init"
+      @qcm.fullText = params[:session][:inputText]
+      @qcm.step = "file"
+      @qcm.save!
+    elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @qcm.step == "file"
+      session[:hiddenText] = params[:session][:hiddenText]
       @qcm.fullText = params[:session][:inputText]
       @qcm.step = "qcm"
       @qcm.save!
@@ -91,14 +94,7 @@ class QcmController < ApplicationController
       array_qcm_choices = Array.new
       array_qcm[1].each do |q|
         array_qcm_choices.push q
-
-        # parce que QCMNlp.generateAnswers(q) ne marche pas
-        begin
-          array_qcm_choices.push QCMNlp.generateAnswers(q)
-        rescue Exception => e
-          array_qcm_choices.push ["erreur", "erreur"]
-        end
-
+        array_qcm_choices.push QCMNlp.generateAnswers(q)
       end
       @qcm.qcm_content = array_qcm[0].join(session[:splitter])
       @qcm.qcm_choices = array_qcm_choices[1].join(session[:splitter])

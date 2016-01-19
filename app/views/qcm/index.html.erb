@@ -80,23 +80,23 @@
 							<% if(@qcm.step == "init") %>
 
 							<div class="tab-pane" role="tabpanel" id="init">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 1 </h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 1 </h3>
 									<%= render "qcm/init" %>
 							</div>
 							<% elsif(@qcm.step == "file") %>
 
 							<div class="tab-pane" role="tabpanel" id="file">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i> Etape 2 </h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 2 </h3>
 									<%= render "qcm/file" %>
 							</div>
 							<% elsif(@qcm.step == "qcm") %>
 							<div class="tab-pane" role="tabpanel" id="qcm">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 3</h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 3</h3>
 									<%= render "qcm/qcm" %>
 							</div>
 							<% elsif (@qcm.step == "answers") %>
 							<div class="tab-pane" role="tabpanel" id="answers">
-								<h3 style="color:white"><i class="fa fa-angle-double-right"></i>Etape 4</h3>
+								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 4</h3>
 									<%= render "qcm/answers" %>
 							</div>
 							<% end %>

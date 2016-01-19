@@ -1,6 +1,8 @@
+<br>
 <%= form_for(:session) do |f| %>
 <div class="field form-group centered" data-step="1" data-intro="Sélectionnez le texte à télécharger puis cliquez une première fois sur Génération afin d'importer son contenu dans la zone de texte. Modifiez le texte importé au besoin, sélectionnez vos options de génération puis cliquez une nouvelle fois sur Génération pour obtenir un texte à trous. NB : les mots qui n'appartiennent pas au dictionnaire apparaissent en majuscule dans la zone de texte." data-position='right'> 																
-	<a class="btn btn-large btn-default pull-right" href="javascript:void(0);" onclick="this.disabled='disabled';javascript:introJs().start();">Besoin d'aide ?</a>
+	<a class="btn btn-large btn-default pull-right" href="javascript:void(0);" onclick="this.disabled='disabled';javascript:introJs().start();"><i class="fa fa-info-circle"></i> Besoin d'aide ?</a>
+	
 	<h5>Téléchargez un document depuis votre machine (png, word, pdf)</h5>
 	<% f.label :inputFile, class: 'btn btn-default centered' %>
 	<%= f.file_field :inputFile, accept: 'image/png,image/jpg,image/jpeg,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.rtf,.pdf,text/plain', :multiple => false, class: 'btn btn-default centered' %>
