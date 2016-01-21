@@ -29,6 +29,17 @@ module QCMNlp
     return output
   end
 
+  def self.wordInBase(word)
+    if word == '' or word.nil?
+      return false
+    end
+    infos = LEXIQUE.getWordInfos(word)
+    if infos.nil?
+      return false
+    end
+    return true
+  end
+  
   #Fonction principale générant le QCM à partir du texte original (text) et, de la proportion de texte masqué (blanks)
   #Renvoi un talbeau contenant le texte segmenté en ouput[0]
   #En ouput[1] les différents mots
@@ -68,7 +79,7 @@ module QCMNlp
       while (total < blank && length > 0)
         a.words.each do |b|
           if total < blank
-            if (b.to_s.length == length) and (!!b.to_s.match(/^[[:alnum:]]+$/) == true)
+            if (b.to_s.length == length) and (!!b.to_s.match(/^[[:alnum:]]+$/) == true) and (wordInBase(b.to_s) == true)
               hidden += 1
               res[b.id.to_s] = b.value
             end

@@ -17,7 +17,6 @@ Prérequis :
 * ImageMagick 
 * libmagickcore-dev 
 * libmagick++-dev 
-* libmagick++-dev 
 * libleptonica-dev
 * zlib1g-dev
 * python-pkgconfig
@@ -37,8 +36,12 @@ Prérequis :
 Installation :
 
 * Récupération du dépôt
-* export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+* export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 ou export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
+* gem install rake -v '10.3.2'
 * bundle install
+* ./rails-bdd.sh -r ou ./rails-bdd.sh -r -b pour forcer
+* cd ./deployment
+* ./init_mongodb_lexiques.sh
 
 Lancement :
 * passenger start -p 80 -d

@@ -7,21 +7,27 @@
 			<h4><i class="fa fa-check"></i> Génération effectuée </h4>
 			<br>
 			<div id="tat-back">
-				<% i = 0 %>
-				<% qcm_content = @qcm.qcm_content.split (session[:splitter]) %>
-				<% qcm_choices = @qcm.qcm_choices.split (session[:splitter]) %>
-				<% j = qcm_content.count %>
-				<% qcm_content.each do |a| %>
-				<% 	i=i+1 %>
-				<%	if (a.nil? || a == '')%>
-				<%=	 	f.label a %>
-				<%	else%>
-				<%= 		f.label i, a %>
-				<%	end%>
-				<% 	if (i < j) %>
-				<%= 	f.select(i, qcm_choices, { include_blank: false})%>
-				<% 	end %>
-				<% end %>
+			  <% i = 0 %>
+			  <% h = 0 %>
+			  <% qcm_content = @qcm.qcm_content.split (session[:splitter]) %>
+			  <% qcm_choices = @qcm.qcm_choices.split (session[:splitter]) %>
+			  <% j = qcm_content.count %>
+			  <% qcm_content.each do |a| %>
+			  <% 	i=i+1 %>
+			  <%	if (a.nil? || a == '')%>
+			  <%=	 	f.label a %>
+			  <%	else%>
+			  <%= 		f.label i, a %>
+			  <%	end%>
+			  <% 	if (i < j) %>
+			  <%		array_tmp = Array.new %>
+			  <%            array_tmp.push qcm_choices[h] %>
+			  <%            array_tmp.push qcm_choices[h+1] %>
+			  <%            array_tmp.push qcm_choices[h+2] %>
+			  <%            h = h+3 %>
+			  <%=		f.select(i,  array_tmp, { include_blank: false}, { style: "color: black" })%>
+			  <% 	end %>
+			  <% end %>
 			</div>
 		</div>
 	</div>
