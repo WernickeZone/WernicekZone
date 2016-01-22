@@ -89,15 +89,18 @@ class QcmController < ApplicationController
     #Générer le texte à trous et l'envoie le stocke dans un object temporaire disponible pour le front-end
     require 'core/qcmnlp.rb'
     array_qcm = QCMNlp.generateQCM(@qcm.fullText, session[:hiddenText])
-    @qcm.qcm_answers = array_qcm[1];
     if (!array_qcm.nil?)
       array_qcm_choices = Array.new
+      array_tmp_answers = Array.new
       array_qcm[1].each do |q|
         array_qcm_choices.push q
-        array_qcm_choices.push QCMNlp.generateAnswers(q)
+        array_tmp_answers = QCMNlp.generateAnswers(q)
+        array_qcm_choices.push array_tmp_answers[0]
+        array_qcm_choices.push array_tmp_answers[1]
       end
       @qcm.qcm_content = array_qcm[0].join(session[:splitter])
-      @qcm.qcm_choices = array_qcm_choices[1].join(session[:splitter])
+      @qcm.qcm_answers = array_qcm[1].join(session[:splitter])
+      @qcm.qcm_choices = array_qcm_choices.join(session[:splitter])
     else
       @qcm.step = "init"
     end
