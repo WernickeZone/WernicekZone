@@ -30,9 +30,9 @@
 		<% r = 0 %>
 		<% f = 0 %>
 		<% is_right = @qcm.is_right.split (session[:splitter]) %>
-		<% f = is_right.count{|x| x == "false" } %>
+		<% f = is_right.count{|x| x == "true" } %>
 		<% r = is_right.count %>
-		<% res = ((r.to_f / f.to_f)-1)*100 %>
+		<% res = ((f.to_f / r.to_f))*100 %>
 		<h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
 	</div>
 </div>
