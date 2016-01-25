@@ -21,9 +21,9 @@
 			  <%	end%>
 			  <% 	if (i < j) %>
 			  <%		array_tmp = Array.new %>
-			  <%            array_tmp.push qcm_choices[h] %>
-			  <%            array_tmp.push qcm_choices[h+1] %>
-			  <%            array_tmp.push qcm_choices[h+2] %>
+			  <%            if !qcm_choices[h].include? ":" and !qcm_choices[h].include? "-" then array_tmp.push qcm_choices[h] end %>
+			  <%            if !qcm_choices[h+1].include? ":" and !qcm_choices[h+1].include? "-" then array_tmp.push qcm_choices[h+1] end %>
+			  <%            if !qcm_choices[h+2].include? ":" and !qcm_choices[h+2].include? "-" then array_tmp.push qcm_choices[h+2] end %>
 			  <%            h = h+3 %>
 			  <%=		f.select(i,  array_tmp, { include_blank: false}, { style: "color: black" })%>
 			  <% 	end %>
