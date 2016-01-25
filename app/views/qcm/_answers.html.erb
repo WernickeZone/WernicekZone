@@ -16,9 +16,9 @@
 						<font color="lime"><%= qcm_answers[i] %></font>
 				<% 	elsif is_right[i] == "false" %>
 				<% 		if !user_answers[i].nil? %>
-							<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= qcm_answers[i] %></font></span>
+							<span TITLE="Vous aviez sélectionné : <%= user_answers[i] %>"><font color="red"><%= qcm_answers[i] %></font></span>
 				<%		else%>
-							<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= qcm_answers[i] %></font></span>
+							<span TITLE="Vous n'aviez rien sélectionné."><font color="red"><%= qcm_answers[i] %></font></span>
 				<% 		end %>
 				<% 	else  %>
 
@@ -27,6 +27,13 @@
 				<% end %>
 			</div>
 		</div>
+		<% r = 0 %>
+		<% f = 0 %>
+		<% is_right = @qcm.is_right.split (session[:splitter]) %>
+		<% f = is_right.count{|x| x == "false" } %>
+		<% r = is_right.count %>
+		<% res = ((r.to_f / f.to_f)-1)*100 %>
+		<h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
 	</div>
 </div>
 <ul class="list-inline pull-right">
