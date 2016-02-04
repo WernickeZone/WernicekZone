@@ -7,10 +7,7 @@ class TatController < ApplicationController
       @tat = Tat.find(session[:key])
     end
     if @tat.nil?
-      @tat = Tat.new
-      @tat.step = "init"
-      @tat.save!
-      session[:key] = @tat.id
+      reset
     end
   end
 
@@ -101,5 +98,38 @@ class TatController < ApplicationController
       @tat.is_right = array_isRight.join(session[:splitter])
     end
     @tat.save!
+  end
+
+  def share
+    @tat_share = Tat_share.new
+    @tat_share.fullText = @tat.fullText
+    @tat_share.tat_content = @tat.tat_content
+    @tat_share.tat_answers = @tat.tat_answers
+    @tat_share.save!
+    session[:share] = @tat_share.id
+  end
+
+  def show
+    @tat_share = Tat_share.find(params[:id])
+    if @tat_share.nil?
+      session[:tat_share_found] = false
+    else
+      session[:tat_share_found] = true
+      @tat = Tat.new
+      @tat.fullText = @tat_share.fullText
+      @tat.tat_content = @tat_share.tat_content
+      @tat.tat_answers = @tat_share.tat_answers
+      @tat.step = "tat"
+      @tat.save!
+      session[:key] = @tat.id
+    end
+    redirect_to action: "index"    
+  end
+
+  def reset
+    @tat = Tat.new
+    @tat.step = "init"
+    @tat.save!
+    session[:key] = @tat.id
   end
 end
