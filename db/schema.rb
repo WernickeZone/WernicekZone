@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20151216102728) do
     t.text     "step"
     t.text     "tat_content"
     t.text     "tat_answers"
+    t.text     "error_margin"
+    t.text     "hidden_text"
     t.text     "user_answers"
     t.text     "is_right"
     t.datetime "created_at"

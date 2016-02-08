@@ -39,7 +39,7 @@ while getopts ":c:" option
  elif [ ${collection} == "contacts" ]
  then
 	FILE_NAME=""$COLLECTION_CONTACT"-"$DATE".csv"
-	mongoexport --csv -d $DB -c $COLLECTION_CONTACT -f 'nom','email','message' -o $FILE_NAME
+	mongoexport --csv -d $DB -c $COLLECTION_CONTACT -f \"nom\",\"email\",\"message\" -o $FILE_NAME
  else 
 	echo $USAGE
 	exit 1
