@@ -24,9 +24,14 @@
 				</div>
 			</div>
 	<ul class="list-inline pull-right">
-		<br>
+	  <br>
+	        <input name="share" id="share" type="hidden" value="false" />
+	  	<li><button type="submit" class="btn btn-default next-step" onClick="document.getElementById('share').value='true'" ><i class="fa fa-share"></i> Partager</button></li>
 		<li><button type="submit" class="btn btn-default next-step"> <i class="fa fa-caret-square-o-right"></i> Lancer la correction</button></li>
 	</ul>
 		</div>
 	</div>
+	<% if !session[:share].nil? %>
+	<%= "Le texte à trous est partagé à cette adresse : " +  "http://www.wernicke.zone/tat/" + session[:share]["$oid"].to_s %>
+	<% end %>
 <% end %>

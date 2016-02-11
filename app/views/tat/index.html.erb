@@ -78,17 +78,16 @@
 
 						<div class="tab-content">
 							<% if(@tat.step == "init" || @tat.fullText.nil?) %>
-
 							<div class="tab-pane" role="tabpanel" id="init">
 								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 1 </h3>
-									<%= render "tat/init" %>
+								<%= render "tat/init" %>
 							</div>
-
+							
 							<% elsif(@tat.step == "file") %>
 
 							<div class="tab-pane" role="tabpanel" id="file">
 							<div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
-								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 2 </h3>
+							  <h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 2</h3>
 								</div></div></div></div>
 									<%= render "tat/file" %>
 							</div>
@@ -106,9 +105,15 @@
 								<h3 style="color:white"><i class="fa fa-arrow-circle-right"></i> Etape 4</h3>
 									<%= render "tat/answers" %>
 							</div>
+
+							<% else %>
+							<%= form_for(:reset) do |f| %>
+							<br><%= f.submit "Recommencer", class: 'btn btn-default inverse pull-left' %>
+							<% end %>
 							<% end %>
 							<div class="clearfix"></div>
-						</div>
+
+		</div>
 					</form>
 				</div>
 			</section>
