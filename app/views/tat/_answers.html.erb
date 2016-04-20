@@ -67,6 +67,44 @@
 
 </div>
 </div>
+<center>
+<h3 style="color:white;">Wernicke Zone vous a plu ? </h3> 
+------------<br>
+<button type='button' class="btn btn-default" data-toggle="modal" data-target="#avis"><i class="fa fa-star" aria-hidden="true"></i> Donnez nous votre avis ! </button>
+</center>
+<div class="modal fade " id="avis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog  modal-vertical-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">Votre avis nous intéresse !</h4>
+        </div>
+        <div class="modal-body" style="color:black;">
+        Notez sur 5 étoiles l'application Wernicke Zone :<br>
+        <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="5 étoiles"></label>
+    <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="4.5 étoiles"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="4 étoiles"></label>
+    <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="3.5 étoiles"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="3 étoiles"></label>
+    <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="2.5 étoiles"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="2 étoiles"></label>
+    <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="1.5 étoiles"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="1 étoile"></label>
+    <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="0.5 étoile"></label>
+    </fieldset>
+      <br><br><br><br>Un commentaire à ajouter ?<br><br>
+      <textarea class="form-control" placeholder="Optionnel"></textarea>
+        <br>
+   <button type='button' id="copyLink" data-clipboard-target="#thelink" class="btn btn-default" > Envoyez votre avis </button>
+    
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
  <script>
     var btn = document.getElementById('copyLink');
