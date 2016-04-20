@@ -14,8 +14,8 @@
 		<hr><br> 
 		<div class="offer" data-step="3" data-intro="Pour un texte à trous plus simple, sélectionnez une proportion de texte masquée plus basse et une marge d'erreur plus élevée (0 - Aucune tolérance sur les erreurs. 1 - Tolérance grammaticale. 2 - Niveau 1 + synonymes.); le texte généré aura moins de trous, et la correction sera moins sévère." data-position='bottom'>
 			<div class="offer-content">
-
-				<div class="form-group">
+			  <div class="form-group">
+					Proportion de texte masquée
 					<%= 	f.select(:hiddenText, ['10%','20%','30%','40%'], {}, { :class => 'form-control'})%>
 				</div>
 			</div>

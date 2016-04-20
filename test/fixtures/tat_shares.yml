@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fullText: 
+  tat_content: 
+  tat_answers: 
+
+two:
+  fullText: 
+  tat_content: 
+  tat_answers: 

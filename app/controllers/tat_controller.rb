@@ -1,17 +1,15 @@
 # coding: utf-8
 class TatController < ApplicationController
+  #skip_before_filter :verify_authenticity_token
   def index
     #Initialise les données liées à la session de l'utilisateur
-    session[:splitter] = '|-@-|'
     if !session[:key].nil?
       @tat = Tat.find(session[:key])
     end
-    if @tat.nil?
-      @tat = Tat.new
-      @tat.step = "init"
-      @tat.save!
-      session[:key] = @tat.id
+    if @tat.nil? or !params[:reset].nil?
+      reset
     end
+    session[:splitter] = '|-@-|'
   end
 
   def create
@@ -19,18 +17,23 @@ class TatController < ApplicationController
     if !session[:key].nil?
       @tat = Tat.find(session[:key])
     end
-    if @tat.nil?
-      @tat = Tat.new
-      @tat.step = "init"
-      @tat.save!
-      session[:key] = @tat.id
+    if @tat.nil? or !params[:reset].nil?
+      reset
+    end
+    #Controle si le partage est activé ou non puis reroute vers index
+    if @tat.step == "tat" or @tat.step == "answers"
+      if params[:share] == "true"
+        share
+      else
+        session[:share] = nil
+      end
     end
     #Reroute vers les différentes méthodes en fonctions des données envoyées par l'utilisateur
-    if params[:session] && !params[:session][:inputFile].nil?
+    if params[:session] && !params[:session][:inputFile].nil? && @tat.step == "init"
       @tat.step = "file"
       @tat.save!
       upload
-    elsif params[:session] && !params[:session]["1"].nil? && @tat.step == "tat"
+    elsif params[:session] && !params[:session]["1"].nil? && @tat.step == "tat" && params[:share] == "false"
       @tat.step = "answers"
       @tat.save!
       tatVerify
@@ -40,12 +43,12 @@ class TatController < ApplicationController
       @tat.save!
     elsif params[:session] && !params[:session][:inputText].nil? && params[:session][:inputText] != "" && @tat.step == "file"
       @tat.fullText = params[:session][:inputText]
-      session[:hiddenText] = params[:session][:hiddenText]
-      session[:errorMargin] = params[:session][:errorMargin]
+      @tat.error_margin = params[:session][:errorMargin]
+      @tat.hidden_text = params[:session][:hiddenText]
       @tat.step = "tat"
       @tat.save!
       tatGeneration
-    else
+    elsif session[:share].nil?
       @tat.step = "init"
       @tat.save!
     end
@@ -55,8 +58,6 @@ class TatController < ApplicationController
   def upload
     #Méthode permettant à l'utilisateur de charger un fichier
     require 'core/IOFiles.rb'
-    session[:hiddenText] = params[:session][:hiddenText]
-    session[:errorMargin] = params[:session][:errorMargin]
     uploaded_io = params[:session][:inputFile]
     #session[:inputText] = IOFiles.getFileContent(uploaded_io)
     #Si c'est un fichier texte, utilise l'extracteur de texte et si c'est un fichier image, l'OCR
@@ -74,7 +75,7 @@ class TatController < ApplicationController
   def tatGeneration
     #Générer le texte à trous et l'envoie le stocke dans un object temporaire disponible pour le front-end
     require 'core/tatnlp.rb'
-    array_tat = TATNLP.generateTat(@tat.fullText, session[:hiddenText])
+    array_tat = TATNLP.generateTat(@tat.fullText, @tat.hidden_text)
     if (!array_tat.nil?)
       @tat.tat_content = array_tat[0].join(session[:splitter])
       @tat.tat_answers = array_tat[1].join(session[:splitter])
@@ -96,10 +97,52 @@ class TatController < ApplicationController
       for i in 1..j
 	user_answers.push params[:session][i.to_s]
       end
-      array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers, session[:errorMargin])
+      array_isRight = TATNLP.verifyAnswers(tat_answers, user_answers, @tat.error_margin)
       @tat.user_answers = user_answers.join(session[:splitter])
       @tat.is_right = array_isRight.join(session[:splitter])
     end
     @tat.save!
+  end
+
+  def share
+    @tat_share = Tat_share.new
+    @tat_share.fullText = @tat.fullText
+    @tat_share.tat_content = @tat.tat_content
+    @tat_share.tat_answers = @tat.tat_answers
+    @tat_share.error_margin = @tat.error_margin
+    @tat_share.hidden_text = @tat.hidden_text
+    @tat_share.save!
+    session[:share] = @tat_share.id
+  end
+
+  def show
+    tat_share_id = Hash.new
+    tat_share_id["$oid"] = params[:id]
+    @tat_share = Tat_share.find(tat_share_id)
+    if @tat_share.nil?
+      session[:tat_share_found] = "false"
+    elsif !params[:id].nil?
+      #reset_session
+      session[:tat_share_found] = "true"
+      @tat = Tat.new
+      @tat.fullText = @tat_share.fullText
+      @tat.tat_content = @tat_share.tat_content
+      @tat.tat_answers = @tat_share.tat_answers
+      @tat.hidden_text = @tat_share.hidden_text
+      @tat.error_margin = @tat_share.error_margin
+      @tat.step = "tat"
+      @tat.save!
+      session[:key] = @tat.id
+    end
+    redirect_to action: "index"
+  end
+
+  def reset
+    @tat = Tat.new
+    @tat.step = "init"
+    @tat.save!
+    #reset_session
+    session[:key] = @tat.id
+    redirect_to action: "index"
   end
 end

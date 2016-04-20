@@ -1,41 +1,48 @@
 <%= form_for(:session) do |f| %>
-	<div class="offer">
-		<div class="offer-content">
-			<div class="field form-group centered">
-				<%= f.submit "Remise à zéro", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
-				<h4><i class="fa fa-check"></i> Réponses </h4>
-				<br>
-				<div id="tat-back">
-					<% tat_content = @tat.tat_content.split (session[:splitter]) %>
-					<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
-					<% user_answers = @tat.user_answers.split (session[:splitter]) %>
-					<% is_right = @tat.is_right.split (session[:splitter]) %>
-					<% i = 0 %>
-					<% tat_content.each do |a| %>
-					<%= a %>
-					<% 	if is_right[i] == "true" %>
-							<font color="lime"><%= tat_answers[i] %></font>
-					<% 	elsif is_right[i] == "false" %>
-					<% 		if !user_answers[i].nil? %>
-								<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
-					<%		else%>
-								<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
-					<% 		end %>
-					<% 	end %>
-					<% 	i = i + 1 %>
-					<% end %>
-				</div>
-			</div>
-<% r = 0 %>
-<% f = 0 %>
-<% is_right = @tat.is_right.split (session[:splitter]) %>
-<% f = is_right.count{|x| x == "false" } %>
-<% r = is_right.count %>
-<% res = ((r.to_f / f.to_f)-1)*100 %>
-
-<h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
-
-
-		</div>
-	</div>
+<div class="offer">
+  <div class="offer-content">
+    <div class="field form-group centered">
+      <%= f.submit "Remise à zéro", class: 'btn btn-default inverse pull-right', onClick: "this.form.reset(); document.getElementById('session_inputText').value=''" %>
+      <h4><i class="fa fa-check"></i> Réponses </h4>
+      <br>
+      <div id="tat-back">
+	<% tat_content = @tat.tat_content.split (session[:splitter]) %>
+	<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+	<% user_answers = @tat.user_answers.split (session[:splitter]) %>
+	<% is_right = @tat.is_right.split (session[:splitter]) %>
+	<% i = 0 %>
+	<% tat_content.each do |a| %>
+	<%= a %>
+	<% if is_right[i] == "true" %>
+	<font color="lime"><%= tat_answers[i] %></font>
+	<% elsif is_right[i] == "false" %>
+	<% if !user_answers[i].nil? %>
+	<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
+	<%else%>
+	<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
+	<% end %>
+	<% end %>
+	<% i = i + 1 %>
+	<% end %>
+      </div>
+    </div>
+    <% r = 0 %>
+    <% f = 0 %>
+    <% is_right = @tat.is_right.split (session[:splitter]) %>
+    <% f = is_right.count{|x| x == "true" } %>
+    <% r = is_right.count %>
+    <% res = ((f.to_f / r.to_f))*100 %>
+    
+    <h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
+    
+    <input name="share" id="share" type="hidden" value="false" />
+    
+    <% if !session[:share].nil? %>
+    <%= "Le texte à trous est partagé, vous pouvez y accèder cette adresse : " +  "http://www.wernicke.zone/tat/" + session[:share]["$oid"].to_s %>
+    <% else %>
+    <br><button type="submit" class="btn btn-default next-step" onClick="document.getElementById('share').value='true'" ><i class="fa fa-share"></i> Partager le texte à trous </button>
+    <% end %>
+   
+  </div>
+</div>
 <% end %>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 resources :selection
 resources :landing
 resources :tat, :path => "texte-a-trous", via: [:get, :post]
+get 'tat/:id', to: 'tat#show'
 get 'tat', to: redirect('/texte-a-trous')
 resources :qcm, :path => "qcm", via: [:get, :post]
 get 'qcm', to: redirect('/qcm')
