@@ -6,43 +6,108 @@
       <h4><i class="fa fa-check"></i> Réponses </h4>
       <br>
       <div id="tat-back">
-	<% tat_content = @tat.tat_content.split (session[:splitter]) %>
-	<% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
-	<% user_answers = @tat.user_answers.split (session[:splitter]) %>
-	<% is_right = @tat.is_right.split (session[:splitter]) %>
-	<% i = 0 %>
-	<% tat_content.each do |a| %>
-	<%= a %>
-	<% if is_right[i] == "true" %>
-	<font color="lime"><%= tat_answers[i] %></font>
-	<% elsif is_right[i] == "false" %>
-	<% if !user_answers[i].nil? %>
-	<span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
-	<%else%>
-	<span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
-	<% end %>
-	<% end %>
-	<% i = i + 1 %>
-	<% end %>
+       <% tat_content = @tat.tat_content.split (session[:splitter]) %>
+       <% tat_answers = @tat.tat_answers.split (session[:splitter]) %>
+       <% user_answers = @tat.user_answers.split (session[:splitter]) %>
+       <% is_right = @tat.is_right.split (session[:splitter]) %>
+       <% i = 0 %>
+       <% tat_content.each do |a| %>
+       <%= a %>
+       <% if is_right[i] == "true" %>
+       <font color="lime"><%= tat_answers[i] %></font>
+       <% elsif is_right[i] == "false" %>
+       <% if !user_answers[i].nil? %>
+       <span TITLE="Vous aviez écrit : <%= user_answers[i] %>"><font color="red"><%= tat_answers[i] %></font></span>
+       <%else%>
+       <span TITLE="Vous n'aviez rien écrit."><font color="red"><%= tat_answers[i] %></font></span>
+       <% end %>
+       <% end %>
+       <% i = i + 1 %>
+       <% end %>
+     </div>
+   </div>
+   <% r = 0 %>
+   <% f = 0 %>
+   <% is_right = @tat.is_right.split (session[:splitter]) %>
+   <% f = is_right.count{|x| x == "true" } %>
+   <% r = is_right.count %>
+   <% res = ((f.to_f / r.to_f))*100 %>
+
+   <h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
+
+   <input name="share" id="share" type="hidden" value="false" />
+
+   <% if !session[:share].nil? %>
+   <br>
+   <button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-share"></i> Voir le lien de partage
+  </button>
+  <!-- Modal -->
+  <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog  modal-vertical-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">Lien du texte à trous</h4>
+        </div>
+        <div class="modal-body" style="color:black;">
+        Le texte à trous est partagé et accessible à n'importe quel utilisateur depuis ce lien :<br><br>
+         <input id="thelink" type="text" class="form-control" value="http://www.wernicke.zone/tat/<%= session[:share]["$oid"].to_s %>"><br>
+         <button type='button' id="copyLink" data-clipboard-target="#thelink" class="btn btn-default" ><i class="fa fa-share"></i> Copier </button>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
       </div>
     </div>
-    <% r = 0 %>
-    <% f = 0 %>
-    <% is_right = @tat.is_right.split (session[:splitter]) %>
-    <% f = is_right.count{|x| x == "true" } %>
-    <% r = is_right.count %>
-    <% res = ((f.to_f / r.to_f))*100 %>
-    
-    <h5>Vous avez <%= res.round(2) %> % de bonne(s) reponse(s) !</h5>
-    
-    <input name="share" id="share" type="hidden" value="false" />
-    
-    <% if !session[:share].nil? %>
-    <%= "Le texte à trous est partagé, vous pouvez y accèder cette adresse : " +  "http://www.wernicke.zone/tat/" + session[:share]["$oid"].to_s %>
-    <% else %>
-    <br><button type="submit" class="btn btn-default next-step" onClick="document.getElementById('share').value='true'" ><i class="fa fa-share"></i> Partager le texte à trous </button>
-    <% end %>
-   
   </div>
+  <% else %>
+  <br><button type="submit" class="btn btn-default next-step" onClick="document.getElementById('share').value='true'" ><i class="fa fa-share"></i> Partager le texte à trous </button>
+  <% end %>
+
 </div>
+</div>
+<center>
+<h3 style="color:white;">Wernicke Zone vous a plu ? </h3> 
+------------<br>
+<button type='button' class="btn btn-default" data-toggle="modal" data-target="#avis"><i class="fa fa-star" aria-hidden="true"></i> Donnez nous votre avis ! </button>
+</center>
+<div class="modal fade " id="avis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog  modal-vertical-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel" style="color:black;">Votre avis nous intéresse !</h4>
+        </div>
+        <div class="modal-body" style="color:black;">
+        Notez sur 5 étoiles l'application Wernicke Zone :<br>
+        <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="5 étoiles"></label>
+    <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="4.5 étoiles"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="4 étoiles"></label>
+    <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="3.5 étoiles"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="3 étoiles"></label>
+    <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="2.5 étoiles"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="2 étoiles"></label>
+    <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="1.5 étoiles"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="1 étoile"></label>
+    <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="0.5 étoile"></label>
+    </fieldset>
+      <br><br><br><br>Un commentaire à ajouter ?<br><br>
+      <textarea class="form-control" placeholder="Optionnel"></textarea>
+        <br>
+   <button type='button' id="copyLink" data-clipboard-target="#thelink" class="btn btn-default" > Envoyez votre avis </button>
+    
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
+ <script>
+    var btn = document.getElementById('copyLink');
+    var clipboard = new Clipboard(btn);
+
+</script>
