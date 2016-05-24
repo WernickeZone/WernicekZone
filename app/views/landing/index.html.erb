@@ -434,7 +434,7 @@
               <div class="col-md-4 col-md-offset-4 scrollpoint sp-effect2">
 		<%= form_for :newsletter do |f| %>
 		<div class="form-group">
-		  <%= f.text_field 'email', class: 'form-control' , placeholder: 'E-mail' %>
+		  <%= f.email_field 'email', class: 'form-control' , placeholder: 'E-mail' %>
 		  </div>
 		<%= f.submit "S'inscrire", class: 'btn btn-default btn-lg' %> 
 		<% end %>
@@ -461,13 +461,13 @@
               <div class="col-md-8 col-sm-8 scrollpoint sp-effect1">
 		<%= form_for :contact, role: 'form' do |f| %>
                 <div class="form-group">
-		  <%= f.text_field 'nom', class: 'form-control' , placeholder: 'Votre nom' %>
+		  <%= f.text_field 'nom', class: 'form-control' , placeholder: 'Votre nom' , :required => true %>
                 </div>
                 <div class="form-group">
-		  <%= f.text_field 'email', class: 'form-control' , placeholder: 'Votre e-mail' %>
+		  <%= f.email_field 'email', class: 'form-control' , placeholder: 'Votre e-mail' , :required => true%>
                 </div>
                 <div class="form-group">
-		  <%= f.text_area 'message', class: 'form-control' , placeholder: 'Votre message' , rows: 10, cols: 30 %>
+		  <%= f.text_area 'message', class: 'form-control' , placeholder: 'Votre message' , rows: 10, cols: 30, :required => true %>
                 </div>
 		<%= f.submit "Envoyer", class: 'btn btn-primary btn-lg' %> 
 		<% end %>
@@ -496,7 +496,7 @@
                     <i class="fa fa-phone fa-2x"></i>
                   </a>
                   <div class="media-body">
-                    <h4 class="media-heading">0147897445</h4>
+                    <h4 class="media-heading">06 76 54 89 22</h4>
                   </div>
                 </div>
               </div>

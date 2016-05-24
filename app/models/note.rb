@@ -3,12 +3,8 @@ class Note
   field :note, type: Integer
   field :commentaire, type: String
   field :created_at, type: DateTime
+  
+  validates :note, :presence => true
 
-  def self.new(note, commentaire = "")
-    if (note >= 0 or note <= 5)
-      self.note = note
-      self.commentaire = commentaire
-      self.created_at = DateTime.now
-    end
-  end
+  
 end

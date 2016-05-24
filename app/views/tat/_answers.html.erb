@@ -70,8 +70,12 @@
 <center>
 <h3 style="color:white;">Wernicke Zone vous a plu ? </h3> 
 ------------<br>
+
 <button type='button' class="btn btn-default" data-toggle="modal" data-target="#avis"><i class="fa fa-star" aria-hidden="true"></i> Donnez nous votre avis ! </button>
-</center>
+<br>
+<% end %>
+
+
 <div class="modal fade " id="avis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog  modal-vertical-centered" role="document">
       <div class="modal-content">
@@ -80,24 +84,33 @@
           <h4 class="modal-title" id="myModalLabel" style="color:black;">Votre avis nous intéresse !</h4>
         </div>
         <div class="modal-body" style="color:black;">
+        <% if flash[:success].nil? %>
         Notez sur 5 étoiles l'application Wernicke Zone :<br>
-        <fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="5 étoiles"></label>
-    <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="4.5 étoiles"></label>
-    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="4 étoiles"></label>
-    <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="3.5 étoiles"></label>
-    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="3 étoiles"></label>
-    <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="2.5 étoiles"></label>
-    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="2 étoiles"></label>
-    <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="1.5 étoiles"></label>
-    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="1 étoile"></label>
-    <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="0.5 étoile"></label>
+
+        <%= form_for @note , url: {controller: "tat", action: "create"} do |f| %>
+
+    <fieldset class="rating">
+    <input type="radio" id="star5" name="note" value="5" /><label class = "full" for="star5" title="5 étoiles"></label>
+    <input type="radio" id="star4half" name="note" value="4,5" /><label class="half" for="star4half" title="4.5 étoiles"></label>
+    <input type="radio" id="star4" name="note" value="4" /><label class = "full" for="star4" title="4 étoiles"></label>
+    <input type="radio" id="star3half" name="note" value="3,5" /><label class="half" for="star3half" title="3.5 étoiles"></label>
+    <input type="radio" id="star3" name="note" value="3" /><label class = "full" for="star3" title="3 étoiles"></label>
+    <input type="radio" id="star2half" name="note" value="2,5" /><label class="half" for="star2half" title="2.5 étoiles"></label>
+    <input type="radio" id="star2" name="note" value="2" /><label class = "full" for="star2" title="2 étoiles"></label>
+    <input type="radio" id="star1half" name="note" value="1,5" /><label class="half" for="star1half" title="1.5 étoiles"></label>
+    <input type="radio" id="star1" name="note" value="1" /><label class = "full" for="star1" title="1 étoile"></label>
+    <input type="radio" id="starhalf" name="note" value="0,5" /><label class="half" for="starhalf" title="0.5 étoile"></label>
     </fieldset>
       <br><br><br><br>Un commentaire à ajouter ?<br><br>
-      <textarea class="form-control" placeholder="Optionnel"></textarea>
+      <textarea class="form-control" name="commentaire" placeholder="Optionnel"></textarea>
         <br>
-   <button type='button' id="copyLink" data-clipboard-target="#thelink" class="btn btn-default" > Envoyez votre avis </button>
-    
+            <%= f.submit "Envoyez votre avis", class: "btn btn-default" %>
+
+    <% end %>
+    <% else %>
+<h4 style="color: black;"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Merci, nous avons bien pris en compte votre avis !</h4>
+<% end %>
+
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -105,7 +118,6 @@
       </div>
     </div>
   </div>
-<% end %>
  <script>
     var btn = document.getElementById('copyLink');
     var clipboard = new Clipboard(btn);
