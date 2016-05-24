@@ -53,8 +53,8 @@ class TatController < ApplicationController
       @tat.save!
       tatGeneration
     elsif !params[:note].nil?
-      note = Note.new(note: params[:note].to_i, commentaire: params[:commentaire], created_at: DateTime.now)
-      note.save!
+      @note = Note.new(note: params[:note].to_i, commentaire: params[:commentaire], created_at: DateTime.now)
+      @note.save!
     flash[:success] = "1"
     elsif session[:share].nil?
     @tat.step = "init" 
