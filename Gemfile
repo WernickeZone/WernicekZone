@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 source 'http://gems.github.com'
+gem 'quiet_assets', group: :development
 gem "passenger"
 gem "mongoid"
 gem 'twitter-bootstrap-rails'

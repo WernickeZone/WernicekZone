@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="../assets/tat.css">
 	<link rel="stylesheet" href="../assets/introjs.css">
 	<link rel="stylesheet" href="../assets/wizard.css">
+    <link rel="stylesheet" href="../assets/beta.css">
 	<script src="../assets/wizard.js"></script>
 
 	<script src="../assets/application.js"></script>
@@ -31,6 +32,11 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
+<div id="loader">
+
+</div>
+<div class="corner-ribbon top-left sticky yellow shadow">Bêta</div>
+
 	<%= render "layouts/menu" %>
 
 	<div class="wrapper">
@@ -38,7 +44,7 @@
 		<div class="container">
 			<div class="row">
 				<section>
-					<span style="background-color:white; color:#3fa599; font-size:24px; padding:2px;border-radius:2px"> > Générateur de QCM</span>
+					<span style="background-color:white; color:#3fa599; font-size:24px; padding:2px;border-radius:2px"> > Texte à trous à choix multiple</span>
 					<div class="wizard">
 						<div class="wizard-inner">
 							<div class="connecting-line"></div>
@@ -121,7 +127,13 @@
 
 	});
 
-
+		// Wait for window load
+		$(window).load(function() {
+			// Animate loader off screen
+			$("#loader").animate({
+				top: -200
+			}, 1500);
+		});
 </script>
 </body>
 

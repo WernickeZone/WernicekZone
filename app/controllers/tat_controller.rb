@@ -3,11 +3,14 @@ class TatController < ApplicationController
   #skip_before_filter :verify_authenticity_token
   def index
     #Initialise les données liées à la session de l'utilisateur
+    @note = Note.new
     if !session[:key].nil?
       @tat = Tat.find(session[:key])
     end
     if @tat.nil? or !params[:reset].nil?
-      reset
+     reset
+    flash.discard(:success)
+
     end
     session[:splitter] = '|-@-|'
   end
@@ -19,6 +22,7 @@ class TatController < ApplicationController
     end
     if @tat.nil? or !params[:reset].nil?
       reset
+      flash.discard(:success)
     end
     #Controle si le partage est activé ou non puis reroute vers index
     if @tat.step == "tat" or @tat.step == "answers"
@@ -48,9 +52,13 @@ class TatController < ApplicationController
       @tat.step = "tat"
       @tat.save!
       tatGeneration
+    elsif !params[:note].nil?
+      @note = Note.new(note: params[:note].to_i, commentaire: params[:commentaire], created_at: DateTime.now)
+      @note.save!
+    flash[:success] = "1"
     elsif session[:share].nil?
-      @tat.step = "init"
-      @tat.save!
+    @tat.step = "init" 
+    @tat.save!
     end
     redirect_to action: "index"
   end
