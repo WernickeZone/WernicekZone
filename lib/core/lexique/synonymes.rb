@@ -26,11 +26,11 @@ module SYN
     end
     output = Array.new
     for i in 1..186 do
-      name = "syn" + i.to_s
+      name="syn"+i.to_s
       if (syn.mot.nil? or syn.mot == '')
         return output
       else
-        output.push(syn.mot)
+        output.push(syn.send(name))
       end
     end
     return output
