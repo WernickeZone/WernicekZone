@@ -43,8 +43,12 @@ Installation :
 * cd ./deployment
 * ./init_mongodb_lexiques.sh
 
-Lancement :
-* passenger start -p 80 -d
+Lancement simple :
+* passenger start
 
-Arrêt :
-* passenger stop -p 80
+Arrêt simple :
+* passenger stop
+
+Via docker :
+* Le serveur mongodb doit être dissocié et en écoute
+* Lancement du docker via la commande : docker run -d -c=’nombre de coeur' --net=host DOCKERNAME /exec.sh
