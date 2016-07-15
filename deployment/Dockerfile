@@ -1,4 +1,5 @@
-FROM debian:sid
+FROM debian:jessie
+RUN echo "deb http://ftp.debian.org/debian jessie main \n deb http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y apt-utils
 RUN apt-get install -y locales
@@ -13,37 +14,43 @@ ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 ENV CXXFLAGS='-I/usr/lib/jvm/java-7-openjdk-amd64/include'
 ENV LANG=fr_FR.UTF-8
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get dist-upgrade -y
-RUN apt-get install -y aptitude
 RUN echo 'LANG="fr_FR.UTF-8"' > /etc/default/locale
 RUN apt-get install -y ruby\
-        ruby-dev\
-        nodejs\
-        nodejs-dev\
-        ruby-rails\
-        git\
-        gcc\
-        build-essential
-RUN apt-get install -y openjdk-7-jdk\
-         openjdk-7-jre-lib\
-         ImageMagick\
-         libmagickcore-dev\
-         zlib1g-dev\
-         python-pkgconfig\
-         ruby-rmagick\
-         aspell\
-         aspell-fr\
-         libmagick++-dev\
-         libleptonica-dev\
-         tesseract-ocr-fra\
-         libtesseract-dev\
-         tesseract-ocr\
-         sqlite3\
-         libsqlite3-dev\
-        libaspell-dev
-ADD WernickeZone /var/www/
-RUN gem install rake -v 10.4.2
-RUN gem install railties
+    ruby-dev\
+    ruby-rails\
+    ruby-rmagick\
+    nodejs\
+    nodejs-dev\
+    git\
+    gcc\
+    build-essential\
+    openjdk-7-jdk\
+    openjdk-7-jre-lib\
+    ImageMagick\
+    libmagickcore-dev\
+    libmagick++-dev\
+    libleptonica-dev\
+    zlib1g-dev\
+    python-pkgconfig\
+    aspell\
+    aspell-fr\
+    libaspell-dev\
+    tesseract-ocr\
+    tesseract-ocr-fra\
+    libtesseract-dev\
+    verbiste\
+    sqlite3\
+    libsqlite3-dev\
+    mongodb\
+    mongodb-dev\
+    curl\
+    wget
+
+ADD ../WernickeZone-master /var/www/
+RUN gem install rake -v 10.5.2
+RUN gem install railties -v 4.1.8
 RUN cd /var/www/&& bundle install
 RUN cd /var/www/ && bin/rake db:migrate RAILS_ENV=development
-RUN echo "#!/bin/bash \n cd /var/www/ \n rails s -p 3000" > /exec.sh
+RUN irb /var/www/treat_postinstall.rb
+RUN echo "#!/bin/bash \n cd /var/www/ \n passenger start -p 80" > /exec.sh
+RUN chmod +x exec.sh
