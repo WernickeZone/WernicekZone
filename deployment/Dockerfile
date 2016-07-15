@@ -47,8 +47,8 @@ RUN apt-get install -y ruby\
     wget
 
 ADD ../WernickeZone-master /var/www/
-RUN gem install rake -v 10.4.2
-RUN gem install railties -v 4.2.4
+RUN gem install rake -v 10.5.2
+RUN gem install railties -v 4.1.8
 RUN cd /var/www/&& bundle install
 RUN cd /var/www/ && bin/rake db:migrate RAILS_ENV=development
 RUN irb /var/www/treat_postinstall.rb
