@@ -128,6 +128,22 @@ development:
 
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
+    
+production:
+  clients:
+    default:
+      database: boostrap_development
+      hosts:
+        - localhost:27017
+      options:
+      
+    nlp:
+      database: nlp
+      hosts:
+        - localhost:27017
+  options:
+    raise_not_found_error: false
+
 test:
   clients:
     default:
