@@ -44,7 +44,7 @@ if [ $b -eq 0 ]
 then
     if [ $r -eq 1 ]
     then
-	$rake db:migrate:reset
+	$rake db:migrate:reset RAILS_ENV=production
     fi
     if [ $s -eq 1 ]
     then
@@ -53,7 +53,7 @@ then
 else
     if [ $r -eq 1 ]
     then
-	$bundle $rake db:migrate:reset
+	$bundle $rake db:migrate:reset RAILS_ENV=production
     fi
     if [ $s -eq 1 ]
     then
