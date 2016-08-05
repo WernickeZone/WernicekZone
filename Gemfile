@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 source 'http://gems.github.com'
+source 'https://rails-assets.org'
+gem 'rails-assets-bootstrap'
 gem 'quiet_assets', group: :development
 gem "passenger"
 gem "mongoid"
