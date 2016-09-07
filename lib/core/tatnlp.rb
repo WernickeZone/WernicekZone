@@ -148,19 +148,32 @@ module TATNLP
     #Vérifie la grammaire et les synonymes d'un mot
     require 'core/lexique/synonymes.rb'
     require 'core/lexique/lexique.rb'
-    base = LEXIQUE.getWordBase(tat_word)
-    syns = SYN.getSynonyms(base)
-    if syns.nil?
-      return "false"
-    end
-    syns.each do |syn|
-      #puts "syn : "+syn.downcase
-      #puts "user_word :"+user_word.downcase
-      if syn.downcase == user_word.downcase
-        return "true"
+    tat_base = LEXIQUE.getWordBase(tat_word.downcase)
+    user_base = LEXIQUE.getWordBase(user_word.downcase)
+    tat_syns = SYN.getSynonyms(tat_base)
+    
+    if !tat_syns.nil?
+      tat_syns.each do |tat_syn|
+        #puts "syn : "+syn.downcase
+        #puts "user_word :"+user_word.downcase
+        if tat_syn.downcase == user_base.downcase
+          return "true"
+        end
+        if (verifyLexique(tat_syn.downcase, user_base.downcase) == "true")
+          return "true"
+        end
       end
-      if (verifyLexique(syn.downcase, user_word.downcase) == "true")
-        return "true"
+    end
+
+    user_syns = SYN.getSynonyms(user_base)
+    if !user_syns.nil?
+      user_syns.each do |user_syn|
+        if user_syn.downcase == tat_base.downcase
+           return "true"
+        end
+        if (verifyLexique(user_syn.downcase, tat_base.downcase) == "true")
+          return "true"
+        end
       end
     end
     
