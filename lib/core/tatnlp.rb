@@ -140,7 +140,7 @@ module TATNLP
     end
 
     #Renvoie vrai si les mots sont identiques
-    if (tat_word.downcase == user_word.downcase)
+    if (tat_word.to_s.downcase == user_word.to_s.downcase)
       return "true"
     end
 
@@ -156,10 +156,10 @@ module TATNLP
       tat_syns.each do |tat_syn|
         #puts "syn : "+syn.downcase
         #puts "user_word :"+user_word.downcase
-        if tat_syn.downcase == user_base.downcase
+        if tat_syn.to_s.downcase == user_base.to_s.downcase
           return "true"
         end
-        if (verifyLexique(tat_syn.downcase, user_base.downcase) == "true")
+        if (verifyLexique(tat_syn.to_s.downcase, user_base.to_s.downcase) == "true")
           return "true"
         end
       end
@@ -168,10 +168,10 @@ module TATNLP
     user_syns = SYN.getSynonyms(user_base)
     if !user_syns.nil?
       user_syns.each do |user_syn|
-        if user_syn.downcase == tat_base.downcase
+        if user_syn.to_s.downcase == tat_base.to_s.downcase
            return "true"
         end
-        if (verifyLexique(user_syn.downcase, tat_base.downcase) == "true")
+        if (verifyLexique(user_syn.to_s.downcase, tat_base.to_s.downcase) == "true")
           return "true"
         end
       end
