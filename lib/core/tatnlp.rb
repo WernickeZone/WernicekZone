@@ -115,16 +115,19 @@ module TATNLP
     end
 
     #Renvoie vrai si les mots sont identiques
-    if (tat_word == user_word)
+    if (tat_word.to_s.downcase == user_word.to_s.downcase)
       return "true"
     end
 
     #Importe le lexique et vérifie la grammaire du mot
     require 'core/lexique/lexique.rb'
-    words = LEXIQUE.getAnswersList(tat_word)
-    words.each do |word|
-      if (word == user_word)
-        return "true"
+    words = LEXIQUE.getAnswersList(tat_word.to_s.downcase)
+
+    if !words.nil?
+      words.each do |word|
+        if (word == user_word.to_s.downcase)
+          return "true"
+        end
       end
     end
     
@@ -148,14 +151,16 @@ module TATNLP
     #Vérifie la grammaire et les synonymes d'un mot
     require 'core/lexique/synonymes.rb'
     require 'core/lexique/lexique.rb'
-    tat_base = LEXIQUE.getWordBase(tat_word.downcase)
-    user_base = LEXIQUE.getWordBase(user_word.downcase)
-    tat_syns = SYN.getSynonyms(tat_base)
+    tat_base = LEXIQUE.getWordBase(tat_word.to_s.downcase)
+    user_base = LEXIQUE.getWordBase(user_word.to_s.downcase)
+
+    if (verifyLexique(tat_base.to_s.downcase, user_base.to_s.downcase) == "true")
+      return "true"
+    end
     
+    tat_syns = SYN.getSynonyms(tat_base)
     if !tat_syns.nil?
       tat_syns.each do |tat_syn|
-        #puts "syn : "+syn.downcase
-        #puts "user_word :"+user_word.downcase
         if tat_syn.to_s.downcase == user_base.to_s.downcase
           return "true"
         end
