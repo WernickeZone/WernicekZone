@@ -115,16 +115,19 @@ module TATNLP
     end
 
     #Renvoie vrai si les mots sont identiques
-    if (tat_word == user_word)
+    if (tat_word.to_s.downcase == user_word.to_s.downcase)
       return "true"
     end
 
     #Importe le lexique et vérifie la grammaire du mot
     require 'core/lexique/lexique.rb'
-    words = LEXIQUE.getAnswersList(tat_word)
-    words.each do |word|
-      if (word == user_word)
-        return "true"
+    words = LEXIQUE.getAnswersList(tat_word.to_s.downcase)
+
+    if !words.nil?
+      words.each do |word|
+        if (word == user_word.to_s.downcase)
+          return "true"
+        end
       end
     end
     
@@ -140,7 +143,7 @@ module TATNLP
     end
 
     #Renvoie vrai si les mots sont identiques
-    if (tat_word.downcase == user_word.downcase)
+    if (tat_word.to_s.downcase == user_word.to_s.downcase)
       return "true"
     end
 
@@ -148,19 +151,34 @@ module TATNLP
     #Vérifie la grammaire et les synonymes d'un mot
     require 'core/lexique/synonymes.rb'
     require 'core/lexique/lexique.rb'
-    base = LEXIQUE.getWordBase(tat_word)
-    syns = SYN.getSynonyms(base)
-    if syns.nil?
-      return "false"
+    tat_base = LEXIQUE.getWordBase(tat_word.to_s.downcase)
+    user_base = LEXIQUE.getWordBase(user_word.to_s.downcase)
+
+    if (verifyLexique(tat_base.to_s.downcase, user_base.to_s.downcase) == "true")
+      return "true"
     end
-    syns.each do |syn|
-      #puts "syn : "+syn.downcase
-      #puts "user_word :"+user_word.downcase
-      if syn.downcase == user_word.downcase
-        return "true"
+    
+    tat_syns = SYN.getSynonyms(tat_base)
+    if !tat_syns.nil?
+      tat_syns.each do |tat_syn|
+        if tat_syn.to_s.downcase == user_base.to_s.downcase
+          return "true"
+        end
+        if (verifyLexique(tat_syn.to_s.downcase, user_base.to_s.downcase) == "true")
+          return "true"
+        end
       end
-      if (verifyLexique(syn.downcase, user_word.downcase) == "true")
-        return "true"
+    end
+
+    user_syns = SYN.getSynonyms(user_base)
+    if !user_syns.nil?
+      user_syns.each do |user_syn|
+        if user_syn.to_s.downcase == tat_base.to_s.downcase
+           return "true"
+        end
+        if (verifyLexique(user_syn.to_s.downcase, tat_base.to_s.downcase) == "true")
+          return "true"
+        end
       end
     end
     
